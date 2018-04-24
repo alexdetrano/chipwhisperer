@@ -86,7 +86,7 @@ class OpenADCInterface_NAEUSBChip(Parameterized, Plugin):
                     for d in possible_sn:
                         snlist[str(d.serial_number) + " (" + str(d.product) + ")"] = d.serial_number
 
-                    if self.findParam('cwsn').getValue() not in snlist.values():
+                    if self.findParam('cwsn').getValue() not in list(snlist.values()):
                         self.findParam('cwsn').setValue(None)
 
                     self.findParam('cwsn').setLimits(snlist)
@@ -115,7 +115,7 @@ class OpenADCInterface_NAEUSBChip(Parameterized, Plugin):
         try:
             self.scope.con(self.ser)
             logging.info('OpenADC Found, Connecting')
-        except IOError, e:
+        except IOError as e:
             exctype, value = sys.exc_info()[:2]
             raise IOError("OpenADC: " + (str(exctype) + str(value)))
 

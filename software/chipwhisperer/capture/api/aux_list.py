@@ -134,7 +134,7 @@ class AuxList(Parameterized):
         # List aux modules and parameter groups for each timing
         self._aux_items = OrderedDict()
         self._param_groups = {}
-        for t in self._valid_timings.keys():
+        for t in list(self._valid_timings.keys()):
             self._aux_items[t] = []
             self._param_groups[t] = Parameter(name=self._valid_timings[t], type='group')
             self.getParams().append(self._param_groups[t])
@@ -186,16 +186,16 @@ class AuxList(Parameterized):
         """
         if not callable(func):
             raise TypeError("Provided function is not callable" % func)
-        if timing not in self._valid_timings.keys():
-            raise ValueError("Invalid timing provided: expected one of %s" % self._valid_timings.keys(), timing)
+        if timing not in list(self._valid_timings.keys()):
+            raise ValueError("Invalid timing provided: expected one of %s" % list(self._valid_timings.keys()), timing)
 
         existing_item = None
         if override_class:
             for groups in self._aux_items:
                 for item in self._aux_items[groups]:
                     if item:
-                        new_funct_string = func.im_class.__name__ + '.' + func.__name__
-                        found_item_string = item.function.im_class.__name__ + '.' + item.function.__name__
+                        new_funct_string = func.__self__.__class__.__name__ + '.' + func.__name__
+                        found_item_string = item.function.__self__.__class__.__name__ + '.' + item.function.__name__
 
                         if new_funct_string == found_item_string and timing == groups:
                             existing_item = item
@@ -241,7 +241,7 @@ class AuxList(Parameterized):
             is not a valid timing
         """
         if new_timing not in self._valid_timings:
-            raise ValueError("Invalid timing provided: expected one of %s" % self._valid_timings.keys(), new_timing)
+            raise ValueError("Invalid timing provided: expected one of %s" % list(self._valid_timings.keys()), new_timing)
 
         (timing, idx) = self._findItem(id)
 
@@ -265,7 +265,7 @@ class AuxList(Parameterized):
         enabled. Otherwise, return a list of all functions, enabled or not.
         """
         ret = OrderedDict()
-        for t in self._valid_timings.keys():
+        for t in list(self._valid_timings.keys()):
             ret[t] = []
             for item in self._aux_items[t]:
                 append_item = True

@@ -112,7 +112,7 @@ class AttackScriptGen(Parameterized):
             dockname = "Analysis Script: %s" % script['dockname']
 
             # No previous dock, do setup
-            if 'dock' not in script.keys():
+            if 'dock' not in list(script.keys()):
                 self.__runScriptConverter = partial(self.runScriptFunction, filename=script['filename'])
                 script['widget'].editWindow.runFunction.connect(self.__runScriptConverter)
                 script['dock'] = self.cwGUI.addDock(script['widget'], name=dockname, area=Qt.BottomDockWidgetArea)
@@ -262,7 +262,7 @@ class AttackScriptGen(Parameterized):
         mse.append("def initReporting(self):", 1)
         mse.append("# Configures the attack observers (usually a set of GUI widgets)")
         if len(ResultsBase.registeredObjects)>0:
-            for k, v in ResultsBase.registeredObjects.iteritems():
+            for k, v in ResultsBase.registeredObjects.items():
                 if hasattr(v,"setTraceSource"):
                     mse.append("self.api.getResults(\"%s\").setTraceSource(self.traces)" % k)
                 if hasattr(v,"setAnalysisSource"):

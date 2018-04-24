@@ -440,10 +440,10 @@ class NAEUSB(object):
 
 
 if __name__ == '__main__':
-    from fpga import FPGA
-    from programmer_avr import AVRISP
-    from programmer_xmega import XMEGAPDI, supported_xmega
-    from serial import USART
+    from .fpga import FPGA
+    from .programmer_avr import AVRISP
+    from .programmer_xmega import XMEGAPDI, supported_xmega
+    from .serial import USART
 
     cwtestusb = NAEUSB()
     cwtestusb.con()
@@ -462,7 +462,7 @@ if __name__ == '__main__':
         # fpga.FPGAProgram(open(r"C:\Users\colin\dropbox\engineering\git_repos\CW305_ArtixTarget\temp\artix7test\artix7test.runs\impl_1\cw305_top.bit", "rb"))
         # fpga.FPGAProgram(open(r"C:\E\Documents\academic\sidechannel\chipwhisperer\hardware\api\chipwhisperer-lite\hdl\cwlite_ise_spifake\cwlite_interface.bit", "rb"))
         stoptime = datetime.now()
-        print "FPGA Config time: %s" % str(stoptime - starttime)
+        print("FPGA Config time: %s" % str(stoptime - starttime))
 
     # print fpga.cmdReadMem(10, 6)
     # print fpga.cmdReadMem(0x1A, 4)
@@ -481,21 +481,21 @@ if __name__ == '__main__':
         xmega.setParamTimeout(200)
 
         try:
-            print "Enable"
+            print("Enable")
             xmega.enablePDI(True)
 
-            print "Read sig"
+            print("Read sig")
             # Read signature bytes
             data = xmega.readMemory(0x01000090, 3, "signature")
 
-            print data
+            print(data)
 
             if data[0] != 0x1E or data[1] != 0x97 or data[2] != 0x46:
-                print "Signature bytes failed: %02x %02x %02x != 1E 97 46" % (data[0], data[1], data[2])
+                print("Signature bytes failed: %02x %02x %02x != 1E 97 46" % (data[0], data[1], data[2]))
             else:
-                print "Detected XMEGA128A4U"
+                print("Detected XMEGA128A4U")
 
-            print "Erasing"
+            print("Erasing")
             # Chip erase
             try:
                 xmega.eraseChip()
@@ -504,20 +504,20 @@ if __name__ == '__main__':
                 xmega.enablePDI(True)
 
             fakedata = [i & 0xff for i in range(0, 2048)]
-            print "Programming FLASH Memory"
+            print("Programming FLASH Memory")
             xmega.writeMemory(0x0800000, fakedata, memname="flash")
 
-            print "Verifying"
+            print("Verifying")
             test = xmega.readMemory(0x0800000, 512)
 
-            print test
+            print(test)
 
 
-        except TypeError, e:
-            print str(e)
+        except TypeError as e:
+            print(str(e))
 
-        except IOError, e:
-            print str(e)
+        except IOError as e:
+            print(str(e))
 
         xmega.enablePDI(False)
 
@@ -560,7 +560,7 @@ if __name__ == '__main__':
     # print ["%02x" % i for i in cwtestusb.cmdReadMem(0x300, 16)]
 
 
-    print "Let's Rock and Roll baby"
+    print("Let's Rock and Roll baby")
 
     sertest = True
 
@@ -568,7 +568,7 @@ if __name__ == '__main__':
         usart.init()
         usart.write("hello\n")
         time.sleep(0.1)
-        print usart.read()
+        print(usart.read())
 
     # cwtestusb.sendCtrl(0x1F, 0x01)
     # flog = open("spilog.txt", "w+")

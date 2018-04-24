@@ -3,7 +3,7 @@ tool. Similar to what the glitch explorer does. This script does not spawn a
 gui, and uses the 4.0 api.
 """
 
-from __future__ import print_function, division
+
 
 import time
 import logging

@@ -59,7 +59,7 @@ class DecimationFixed(PreprocessingBase):
 
     @dec_factor.setter
     def dec_factor(self, dec):
-        if not isinstance(dec, (int, long)):
+        if not isinstance(dec, int):
             raise TypeError("Expected int; got %s" % type(dec), dec)
         self._setDecFactor(dec)
 
@@ -69,7 +69,7 @@ class DecimationFixed(PreprocessingBase):
             if trace is None:
                 return None
 
-            outtrace = np.zeros(len(range(0, len(trace), self._dec_factor)))
+            outtrace = np.zeros(len(list(range(0, len(trace), self._dec_factor))))
 
             for idx, val in enumerate(range(0, len(trace), self._dec_factor)):
                 outtrace[idx] = trace[val]
@@ -80,7 +80,7 @@ class DecimationFixed(PreprocessingBase):
 
     def numPoints(self):
         if self.enabled:
-            return len(range(0, self._traceSource.numPoints(), self._dec_factor))
+            return len(list(range(0, self._traceSource.numPoints(), self._dec_factor)))
         else:
             return self._traceSource.numPoints()
 

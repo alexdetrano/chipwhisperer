@@ -3,7 +3,7 @@ tool. Similar to what the glitch explorer does. This script does not spawn a
 gui, and uses the 4.0 api.
 """
 
-from __future__ import print_function, division
+
 
 import time
 import logging
@@ -16,7 +16,7 @@ import numpy as np
 import chipwhisperer as cw
 from chipwhisperer.tests.tools_for_tests import FIRMWARE_DIR
 from chipwhisperer.capture.api.programmers import STM32FProgrammer
-from scripting_utils import GlitchResultsDisplay
+from .scripting_utils import GlitchResultsDisplay
 
 logging.basicConfig(level=logging.WARN)
 scope = cw.scope()

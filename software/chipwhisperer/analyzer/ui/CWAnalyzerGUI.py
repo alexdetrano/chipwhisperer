@@ -143,7 +143,7 @@ class CWAnalyzerGUI(CWMainGUI):
         self._attackSettings = AttackSettings()
         self._preprocessSettings = PreprocessingSettings(api)
 
-        super(CWAnalyzerGUI, self).__init__(api, name="ChipWhisperer" + u"\u2122" + " Analyzer " + CWCoreAPI.__version__, icon="cwiconA")
+        super(CWAnalyzerGUI, self).__init__(api, name="ChipWhisperer" + "\u2122" + " Analyzer " + CWCoreAPI.__version__, icon="cwiconA")
         #self.addExampleScripts(pluginmanager.getPluginsInDictFromPackage("chipwhisperer.analyzer.scripts", False, False, self))
         CWAnalyzerGUI.instance = self
 
@@ -197,7 +197,7 @@ class CWAnalyzerGUI(CWMainGUI):
 
         # Load all ActiveTraceObservers
         self.windowMenu.addSeparator()
-        for k, v in ResultsBase.getClasses().iteritems():
+        for k, v in ResultsBase.getClasses().items():
             if issubclass(v, PassiveTraceObserver) or issubclass(v, AttackObserver):
                 ResultsBase.createNew(k)
         self.tabifyDocks(self.resultDocks)

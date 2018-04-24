@@ -1,7 +1,7 @@
 """Example script for breaking AES manually, similar to the tutorial.
 """
 
-from __future__ import division, print_function
+
 
 import numpy as np
 from tqdm import tqdm
@@ -42,7 +42,7 @@ numpoint = np.shape(traces)[1]
 
 bestguess = [0] * 16
 pge = [256] * 16
-for bnum in tqdm(range(0, 16), desc='Attacking subkeys'):
+for bnum in tqdm(list(range(0, 16)), desc='Attacking subkeys'):
     cpaoutput = [0] * 256
     maxcpa = [0] * 256
     for kguess in range(0, 256):

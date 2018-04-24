@@ -51,7 +51,7 @@ class UserScript(UserScriptBase):
         # Save current open project (default) to a new place
         self.api.saveProject("projects/glitchtest.cwp")
 
-        print "Software Setup - 1. Connect to the ChipWhisperer device:"
+        print("Software Setup - 1. Connect to the ChipWhisperer device:")
         self.api.setParameter(['Generic Settings', 'Scope Module', 'ChipWhisperer/OpenADC'])
         self.api.setParameter(['Generic Settings', 'Target Module', 'Simple Serial'])
         self.api.setParameter(['Generic Settings', 'Trace Format', 'None'])
@@ -60,7 +60,7 @@ class UserScript(UserScriptBase):
         # Connect to both: scope and target
         self.api.connect()
 
-        print "Software Setup - 2. Setup the CLKGEN Module to Generate a 7.37 MHz clock and route it through the Glitch Generator"
+        print("Software Setup - 2. Setup the CLKGEN Module to Generate a 7.37 MHz clock and route it through the Glitch Generator")
         lstexample = [
             ['OpenADC', 'Clock Setup', 'Freq Counter Src', 'CLKGEN Output'],
             ['OpenADC', 'Clock Setup', 'CLKGEN Settings', 'Desired Frequency', 7370000.0],
@@ -70,19 +70,19 @@ class UserScript(UserScriptBase):
         ]
         for cmd in lstexample: self.api.setParameter(cmd)
 
-        print "Software Setup - 3. Connect the Serial Port"
+        print("Software Setup - 3. Connect the Serial Port")
         lstexample = [
             ['CW Extra Settings', 'Target IOn Pins', 'Target IO1', 'Serial RXD'],
             ['CW Extra Settings', 'Target IOn Pins', 'Target IO2', 'Serial TXD']
         ]
         for cmd in lstexample: self.api.setParameter(cmd)
 
-        print "Software Setup - 3.4. Flashing test firmware"
+        print("Software Setup - 3.4. Flashing test firmware")
         xmega_firmware_file = os.path.join(os.path.dirname(chipwhisperer.tests.__file__), r"glitchsimple.hex")
         programmer = self.api.getScope().scopetype.dev.xmega
         programmer.autoProgram(xmega_firmware_file)
 
-        print "Manual Glitch Trigger"
+        print("Manual Glitch Trigger")
         lstexample = [
             ['Glitch Module', 'Glitch Width (as % of period)', 10],
             ['Glitch Module', 'Glitch Offset (as % of period)', 26.6],
@@ -92,21 +92,21 @@ class UserScript(UserScriptBase):
         ]
         for cmd in lstexample: self.api.setParameter(cmd)
 
-        print "Automatically Resetting Target"
+        print("Automatically Resetting Target")
         lstexample = [
             ['Generic Settings', 'Auxiliary Module', 'Reset AVR/XMEGA via CW-Lite'],
             ['Aux Settings', 'Reset AVR/XMEGA via CW-Lite', 'Interface', 'xmega (PDI)'],
             ['Aux Settings', 'Reset AVR/XMEGA via CW-Lite', 'Test Reset', None],  # Push the button
-            ['Simple Serial', 'Load Key Command', u''],
-            ['Simple Serial', 'Go Command', u''],
-            ['Simple Serial', 'Output Format', u''],
+            ['Simple Serial', 'Load Key Command', ''],
+            ['Simple Serial', 'Go Command', ''],
+            ['Simple Serial', 'Output Format', ''],
         ]
         for cmd in lstexample: self.api.setParameter(cmd)
         self.api.capture1()
         self.api.capture1()
         self.api.capture1()
 
-        print "Automatically Triggering Glitch - Enable the power analysis capture"
+        print("Automatically Triggering Glitch - Enable the power analysis capture")
         lstexample = [
             ['OpenADC', 'Clock Setup', 'ADC Clock', 'Source', 'CLKGEN x4 via DCM'],
             ['OpenADC', 'Clock Setup', 'ADC Clock', 'Reset ADC DCM', None],  # Push the button
@@ -119,32 +119,32 @@ class UserScript(UserScriptBase):
         self.api.capture1()
         self.api.capture1()
 
-        print "Automatically Triggering Glitch - Enable the trigger of the glitch to occur based on this external trigger pin"
+        print("Automatically Triggering Glitch - Enable the trigger of the glitch to occur based on this external trigger pin")
         self.api.setParameter(['Glitch Module', 'Glitch Trigger', 'Ext Trigger:Single-Shot'])
         self.api.capture1()
         self.api.capture1()
         self.api.capture1()
 
-        print "Using the Glitch Explorer"
-        self.api.setParameter(['Simple Serial', 'Output Format', u'$GLITCH$'])
+        print("Using the Glitch Explorer")
+        self.api.setParameter(['Simple Serial', 'Output Format', '$GLITCH$'])
         self.api.capture1()
         self.api.capture1()
         self.api.capture1()
         lstexample = [
-            ['Glitch Explorer', 'Normal Response', u"s == '\\x00hello\\nA'"],
-            ['Glitch Explorer', 'Successful Response', u"s.endswith('1234')"],
+            ['Glitch Explorer', 'Normal Response', "s == '\\x00hello\\nA'"],
+            ['Glitch Explorer', 'Successful Response', "s.endswith('1234')"],
         ]
         for cmd in lstexample: self.api.setParameter(cmd)
         self.api.capture1()
         self.api.capture1()
         self.api.capture1()
 
-        print "Using the Glitch Explorer -  Tune the glitch offset to attempt to get a successful clock glitch"
+        print("Using the Glitch Explorer -  Tune the glitch offset to attempt to get a successful clock glitch")
         self.api.setParameter(['Glitch Explorer', 'Plot Widget', None])  # Push the button
         lstexample = [
             ['Glitch Explorer', 'Tuning Parameters', 1],
-            ['Glitch Explorer', 'Tuning Parameter 0', 'Name', u'Offset'],
-            ['Glitch Explorer', 'Tuning Parameter 0', 'Parameter Path', u"['Glitch Module', 'Glitch Offset (as % of period)']"],
+            ['Glitch Explorer', 'Tuning Parameter 0', 'Name', 'Offset'],
+            ['Glitch Explorer', 'Tuning Parameter 0', 'Parameter Path', "['Glitch Module', 'Glitch Offset (as % of period)']"],
             ['Glitch Explorer', 'Tuning Parameter 0', 'Data Format', 'Float'],
             ['Glitch Explorer', 'Tuning Parameter 0', 'Range', (-30, 30)],
             ['Glitch Explorer', 'Tuning Parameter 0', 'Value', -30.0],
@@ -157,11 +157,11 @@ class UserScript(UserScriptBase):
         for cmd in lstexample: self.api.setParameter(cmd)
         self.api.captureM()
 
-        print "Using the Glitch Explorer - Tune the Glitch Width"
+        print("Using the Glitch Explorer - Tune the Glitch Width")
         lstexample = [
             ['Glitch Explorer', 'Tuning Parameters', 2],
-            ['Glitch Explorer', 'Tuning Parameter 1', 'Name', u'Width'],
-            ['Glitch Explorer', 'Tuning Parameter 1', 'Parameter Path', u"['Glitch Module', 'Glitch Width (as % of period)']"],
+            ['Glitch Explorer', 'Tuning Parameter 1', 'Name', 'Width'],
+            ['Glitch Explorer', 'Tuning Parameter 1', 'Parameter Path', "['Glitch Module', 'Glitch Width (as % of period)']"],
             ['Glitch Explorer', 'Tuning Parameter 1', 'Data Format', 'Float'],
             ['Glitch Explorer', 'Tuning Parameter 1', 'Range', (4, 11)],
             ['Glitch Explorer', 'Tuning Parameter 1', 'Value', 4],
@@ -175,7 +175,7 @@ class UserScript(UserScriptBase):
         for cmd in lstexample: self.api.setParameter(cmd)
         self.api.captureM()
 
-        print "Using the Glitch Explorer - Fine-tune those values"
+        print("Using the Glitch Explorer - Fine-tune those values")
         self.api.setParameter(['Glitch Module', 'Glitch Offset (as % of period)',-3.5])
         self.api.setParameter(['Glitch Module', 'Glitch Width (as % of period)',7.5])
         self.api.capture1()

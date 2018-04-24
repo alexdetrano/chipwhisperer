@@ -3,7 +3,7 @@ with the chipwhisperer tool. This script does not spawn a gui, and
 uses the 4.0 api.
 """
 
-from __future__ import division, print_function
+
 
 import time
 import os
@@ -52,7 +52,7 @@ textin = []
 keys = []
 N = 50  # Number of traces
 target.init()
-for i in tqdm(range(N), desc='Capturing traces'):
+for i in tqdm(list(range(N)), desc='Capturing traces'):
     # run aux stuff that should come before trace here
 
     key, text = ktp.newPair()  # manual creation of a key, text pair can be substituted here

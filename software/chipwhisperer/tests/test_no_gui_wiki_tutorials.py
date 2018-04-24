@@ -1,4 +1,4 @@
-from __future__ import print_function, division
+
 
 import unittest
 import time
@@ -83,7 +83,7 @@ class TestTutorialB6BreakingAESManual(unittest.TestCase):
         N = 100 # Number of traces
         print('Capturing traces...')
         target.init()
-        for i in tqdm(range(N)):
+        for i in tqdm(list(range(N))):
             key, text = ktp.newPair() # manual creation of a key, text pair can be substituted here
             textin.append(text)
 
@@ -126,7 +126,7 @@ class TestTutorialB6BreakingAESManual(unittest.TestCase):
         bestguess = [0] * 16
         pge = [256] * 16
         print("Attacking subkeys...")
-        for bnum in tqdm(range(0, 16)):
+        for bnum in tqdm(list(range(0, 16))):
             cpaoutput = [0] * 256
             maxcpa = [0] * 256
             for kguess in range(0, 256):

@@ -81,7 +81,7 @@ class ExecWithParentAsSelf(object):
             exec(string, temp_locals)
 
         if script_path is not None:
-            execfile(script_path, temp_locals)
+            exec(compile(open(script_path).read(), script_path, 'exec'), temp_locals)
 
 
 class FakeCaptureSoftware(object):

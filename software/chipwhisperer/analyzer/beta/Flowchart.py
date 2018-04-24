@@ -54,7 +54,7 @@ from pyqtgraph import metaarray
 from functools import partial
 
 def strDict(d):
-    return dict([(str(k), v) for k, v in d.items()])
+    return dict([(str(k), v) for k, v in list(d.items())])
 
 
 def toposort(deps, nodes=None, seen=None, stack=None, depth=0):
@@ -67,7 +67,7 @@ def toposort(deps, nodes=None, seen=None, stack=None, depth=0):
     if nodes is None:
         ## run through deps to find nodes that are not depended upon
         rem = set()
-        for dep in deps.values():
+        for dep in list(deps.values()):
             rem |= set(dep)
         nodes = set(deps.keys()) - rem
     if seen is None:
@@ -137,7 +137,7 @@ class Flowchart(Node):
         
         self.viewBox.autoRange(padding = 0.04)
             
-        for name, opts in terminals.items():
+        for name, opts in list(terminals.items()):
             self.addTerminal(name, **opts)
       
     def setInput(self, **args):
@@ -310,7 +310,7 @@ class Flowchart(Node):
         #print "ORDER:", order
         
         ## Record inputs given to process()
-        for n, t in self.inputNode.outputs().items():
+        for n, t in list(self.inputNode.outputs().items()):
             if n not in args:
                 raise Exception("Parameter %s required to process this chart." % n)
             data[t] = args[n]
@@ -351,7 +351,7 @@ class Flowchart(Node):
                         else:
                             result = node.process(display=False, **args)
                     except:
-                        print("Error processing node %s. Args are: %s" % (str(node), str(args)))
+                        print(("Error processing node %s. Args are: %s" % (str(node), str(args))))
                         raise
                     for out in outs:
                         #print "    Output:", out, out.name()
@@ -359,7 +359,7 @@ class Flowchart(Node):
                         try:
                             data[out] = result[out.name()]
                         except:
-                            print(out, out.name())
+                            print((out, out.name()))
                             raise
             elif c == 'd':   ## delete a terminal result (no longer needed; may be holding a lot of memory)
                 #print "===> delete", arg
@@ -377,9 +377,9 @@ class Flowchart(Node):
         ## first collect list of nodes/terminals and their dependencies
         deps = {}
         tdeps = {}   ## {terminal: [nodes that depend on terminal]}
-        for name, node in self._nodes.items():
+        for name, node in list(self._nodes.items()):
             deps[node] = node.dependentNodes()
-            for t in node.outputs().values():
+            for t in list(node.outputs().values()):
                 tdeps[t] = t.dependentNodes()
             
         #print "DEPS:", deps
@@ -393,7 +393,7 @@ class Flowchart(Node):
         
         ## determine when it is safe to delete terminal values
         dels = []
-        for t, nodes in tdeps.items():
+        for t, nodes in list(tdeps.items()):
             lastInd = 0
             lastNode = None
             for n in nodes:  ## determine which node is the last to be processed according to order
@@ -428,9 +428,9 @@ class Flowchart(Node):
         self.processing = True
         try:
             deps = {}
-            for name, node in self._nodes.items():
+            for name, node in list(self._nodes.items()):
                 deps[node] = []
-                for t in node.outputs().values():
+                for t in list(node.outputs().values()):
                     deps[node].extend(t.dependentNodes())
             
             ## determine order of updates 
@@ -489,9 +489,9 @@ class Flowchart(Node):
 
     def listConnections(self):
         conn = set()
-        for n in self._nodes.values():
+        for n in list(self._nodes.values()):
             terms = n.outputs()
-            for n, t in terms.items():
+            for n, t in list(terms.items()):
                 for c in t.connections():
                     conn.add((t, c))
         return conn
@@ -502,7 +502,7 @@ class Flowchart(Node):
         state['connects'] = []
         #state['terminals'] = self.saveTerminals()
         
-        for name, node in self._nodes.items():
+        for name, node in list(self._nodes.items()):
             cls = type(node)
             if hasattr(cls, 'nodeName'):
                 clsName = cls.nodeName
@@ -547,8 +547,8 @@ class Flowchart(Node):
                 try:
                     self.connectTerminals(self._nodes[n1][t1], self._nodes[n2][t2])
                 except:
-                    print(self._nodes[n1].terminals)
-                    print(self._nodes[n2].terminals)
+                    print((self._nodes[n1].terminals))
+                    print((self._nodes[n2].terminals))
                     printExc("Error connecting terminals %s.%s - %s.%s:" % (n1, t1, n2, t2))
                     
                 
@@ -628,7 +628,7 @@ class FlowchartGraphicsItem(GraphicsObject):
         inp = self.chart.inputs()
         dy = bounds.height() / (len(inp)+1)
         y = dy
-        for n, t in inp.items():
+        for n, t in list(inp.items()):
             item = t.graphicsItem()
             self.terminals[n] = item
             item.setParentItem(self)
@@ -637,7 +637,7 @@ class FlowchartGraphicsItem(GraphicsObject):
         out = self.chart.outputs()
         dy = bounds.height() / (len(out)+1)
         y = dy
-        for n, t in out.items():
+        for n, t in list(out.items()):
             item = t.graphicsItem()
             self.terminals[n] = item
             item.setParentItem(self)
@@ -892,7 +892,7 @@ class FlowchartWidget(QtGui.QWidget):
         
     def buildToolbox(self):
         self.nodeToolbox = QtGui.QToolBox()
-        for section, nodes in library.getNodeTree().items():
+        for section, nodes in list(library.getNodeTree().items()):
             tbwid = QtGui.QWidget()
             tbl = QtGui.QGridLayout()
             tbwid.setLayout(tbl)
@@ -917,7 +917,7 @@ class FlowchartWidget(QtGui.QWidget):
     def buildMenu(self, pos=None):
         self.nodeMenu = QtGui.QMenu()
         self.subMenus = []
-        for section, nodes in library.getNodeTree().items():
+        for section, nodes in list(library.getNodeTree().items()):
             menu = QtGui.QMenu(section)
             #print section
             self.nodeMenu.addMenu(menu)
@@ -965,7 +965,7 @@ class FlowchartWidget(QtGui.QWidget):
     def selectionChanged(self):
         #print "FlowchartWidget.selectionChanged called."
         items = self._scene.selectedItems()
-        print "     scene.selectedItems: ", items
+        print("     scene.selectedItems: ", items)
         if len(items) == 0:
             data = None
         else:

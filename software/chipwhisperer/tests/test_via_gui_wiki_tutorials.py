@@ -148,7 +148,7 @@ class TestTutorialB5BreakingAESStraightForward(unittest.TestCase):
 
         # check if the key is the expected key
         result_subkeys = self.auto_ui.analyzer.gui.results_table.sub_key_row(1)
-        result_key = u' '.join(result_subkeys)
+        result_key = ' '.join(result_subkeys)
         actual_key = ktp.initkey
 
         logging.info('Actual Key: {}'.format(actual_key))
