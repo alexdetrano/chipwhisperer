@@ -1,4 +1,5 @@
-from PySide.QtGui import *
+from PySide2.QtGui import *
+from PySide2.QtWidgets import *
 import logging
 """ Copied from: http://stackoverflow.com/questions/28655198/best-way-to-display-logs-in-pyqt """
 

@@ -25,8 +25,8 @@ import logging
 import os.path
 import shutil
 import glob
-from PySide.QtCore import *
-from PySide.QtGui import *
+from PySide2.QtCore import *
+from PySide2.QtGui import *
 import chipwhisperer.common.utils.qt_tweaks as QtFixes
 import configparser
 import chipwhisperer.common.traces._cfgfile

@@ -27,9 +27,15 @@
 import os.path
 import time
 from datetime import datetime
-from PySide.QtCore import *
-from PySide.QtGui import *
-from PySide.QtGui import QVBoxLayout, QHBoxLayout, QPushButton, QLabel, QPlainTextEdit, QFileDialog
+try:    
+    from PySide2.QtCore import *
+    from PySide2.QtGui import *
+    from PySide2.QtGui import QVBoxLayout, QHBoxLayout, QPushButton, QLabel, QPlainTextEdit, QFileDialog
+except ModuleNotFoundError:
+    from PySide.QtCore import *
+    from PySide.QtGui import *
+    from PySide.QtGui import QVBoxLayout, QHBoxLayout, QPushButton, QLabel, QPlainTextEdit, QFileDialog
+
 
 from chipwhisperer.common.ui.CWMainGUI import CWMainGUI
 from chipwhisperer.capture.api.programmers import AVRProgrammer, XMEGAProgrammer, STM32FProgrammer

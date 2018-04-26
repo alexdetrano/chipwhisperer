@@ -27,8 +27,8 @@
 
 from chipwhisperer.capture.scopes.cwhardware.ChipWhispererSAM3Update import SAM3LoaderConfig
 import chipwhisperer.capture.scopes.cwhardware.ChipWhispererFWLoader as ChipWhispererFWLoader
-from PySide.QtGui import *
-from PySide.QtCore import *
+from PySide2.QtGui import *
+from PySide2.QtCore import *
 import chipwhisperer.common.utils.qt_tweaks as QtFixes
 from chipwhisperer.common.ui.CWMainGUI import CWMainGUI
 

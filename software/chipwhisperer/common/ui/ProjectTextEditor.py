@@ -26,8 +26,8 @@
 #=================================================
 
 import os
-from PySide.QtCore import *
-from PySide.QtGui import *
+from PySide2.QtCore import *
+from PySide2.QtGui import *
 import chipwhisperer.common.utils.qt_tweaks as QtFixes
 
 

@@ -30,14 +30,14 @@ import traceback
 from chipwhisperer.common.ui.logger_widget import LoggingWidget
 
 try:
-    from PySide.QtCore import *
-    from PySide.QtGui import *
+    from PySide2.QtCore import *
+    from PySide2.QtGui import *
 except ImportError as e:
     print("**********************************************")
-    print("ERROR: PySide is required for this program.\nTry installing with 'pip install pyside' first.")
+    print("ERROR: PySide2 is required for this program.\nTry installing with 'pip install pyside2' first.")
     print("**********************************************\n\n")
 
-    print("Failed to import 'PySide', original exception information:")
+    print("Failed to import 'PySide2', original exception information:")
     raise
 
 try:
