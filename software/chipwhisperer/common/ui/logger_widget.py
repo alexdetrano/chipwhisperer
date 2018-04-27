@@ -87,7 +87,13 @@ class LoggingWidget(QWidget):
         self.editor.setFormatter(logging.Formatter(self._formats[format]))
 
     def setLevel(self, levelName):
-        logging.getLogger().setLevel(logging._levelNames[levelName])
+        # python3 changed the logging module
+        # logging._levelNames no longer exists as a module attribute
+        # so we just set the logging level directly
+        try:
+            logging.getLogger().setLevel(logging._levelNames[levelName])
+        except AttributeError:
+            logging.getLogger().setLevel(levelName)
 
     def __del__(self):
         logging.getLogger().removeHandler(self.editor)
