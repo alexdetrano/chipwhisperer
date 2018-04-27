@@ -26,8 +26,12 @@
 #=================================================
 
 import os
-from PySide2.QtCore import *
-from PySide2.QtGui import *
+try:
+    from PySide2.QtCore import *
+    from PySide2.QtGui import *
+except ImportError:
+    from PySide.QtCore import *
+    from PySide.QtGui import *
 import chipwhisperer.common.utils.qt_tweaks as QtFixes
 
 

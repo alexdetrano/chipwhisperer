@@ -25,7 +25,7 @@
 
 try:
     from PySide2.QtGui import *
-except ModuleNotFoundError:
+except ImportError:
     from PySide.QtGui import *
 
 import chipwhisperer.common.utils.qt_tweaks as QtFixes

@@ -25,7 +25,10 @@
 #    along with chipwhisperer.  If not, see <http://www.gnu.org/licenses/>.
 #=================================================
 
-from PySide.QtGui import *
+try:
+    from PySide2.QtGui import *
+except ImportError:
+    from PySide.QtGui import *
 import chipwhisperer.common.utils.qt_tweaks as QtFixes
 
 

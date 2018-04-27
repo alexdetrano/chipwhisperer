@@ -32,10 +32,16 @@
 
 
 import sys
-from PySide.QtCore import *
-from PySide.QtGui import *
 import os.path
-os.environ["QT_API"] = "pyside"
+try:
+    from PySide2.QtCore import *
+    from PySide2.QtGui import *
+    os.environ["QT_API"] = "pyside2"
+except ImportError:
+    from PySide.QtCore import *
+    from PySide.QtGui import *
+    os.environ["QT_API"] = "pyside"
+
 import matplotlib
 matplotlib.use("Qt4Agg")
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas

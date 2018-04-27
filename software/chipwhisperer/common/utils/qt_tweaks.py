@@ -24,9 +24,18 @@
 #    You should have received a copy of the GNU General Public License
 #    along with chipwhisperer.  If not, see <http://www.gnu.org/licenses/>.
 #=================================================
-import PySide2.QtCore as qtc
-import PySide2.QtGui as qtg
-import PySide2.QtWidgets as qtw
+
+# qt5 moved some functions from QtGui to QtWIdgets
+# in case pysides2 cannot be imported, we need the QtWidget
+# functions from QtGui class. So we "fake" the widget module
+try:
+    import PySide2.QtCore as qtc
+    import PySide2.QtGui as qtg
+    import PySide2.QtWidgets as qtw
+except ImportError:
+    import PySide.QtCore as qtc
+    import PySide.QtGui as qtg
+    import PySide.QtGui as qtw
 
 class QLineEdit(qtw.QLineEdit):
     """Fixes a bug with Mac OS where the Frame would flicker the second time you call show()"""

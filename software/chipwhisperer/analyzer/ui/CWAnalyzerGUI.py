@@ -26,8 +26,12 @@
 import logging
 import sys
 from chipwhisperer.common.ui.CWMainGUI import CWMainGUI, makeApplication
-from PySide.QtGui import *  # DO NOT REMOVE PYSIDE IMPORTS - Required for pyqtgraph to select correct version on some platforms
-from PySide.QtCore import Qt
+try:
+    from PySide2.QtGui import *  # DO NOT REMOVE PYSIDE IMPORTS - Required for pyqtgraph to select correct version on some platforms
+    from PySide2.QtCore import Qt
+except ImportError:
+    from PySide.QtGui import *  # DO NOT REMOVE PYSIDE IMPORTS - Required for pyqtgraph to select correct version on some platforms
+    from PySide.QtCore import Qt
 from chipwhisperer.common.ui.KeyScheduleDialog import AesKeyScheduleDialog, DesKeyScheduleDialog
 from chipwhisperer.common.api.CWCoreAPI import CWCoreAPI
 from chipwhisperer.analyzer.utils.TraceExplorerDialog import TraceExplorerDialog

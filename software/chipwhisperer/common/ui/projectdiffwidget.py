@@ -22,7 +22,10 @@
 #    You should have received a copy of the GNU General Public License
 #    along with chipwhisperer.  If not, see <http://www.gnu.org/licenses/>.
 from pyqtgraph.parametertree import Parameter, ParameterTree
-from PySide2.QtGui import *
+try:
+    from PySide2.QtGui import *
+except ImportError:
+    from PySide.QtGui import *
 
 
 class ProjectDiffWidget(QWidget):

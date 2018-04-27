@@ -31,7 +31,7 @@ try:
     from PySide2.QtCore import *
     from PySide2.QtGui import *
     from PySide2.QtGui import QVBoxLayout, QHBoxLayout, QPushButton, QLabel, QPlainTextEdit, QFileDialog
-except ModuleNotFoundError:
+except ImportError:
     from PySide.QtCore import *
     from PySide.QtGui import *
     from PySide.QtGui import QVBoxLayout, QHBoxLayout, QPushButton, QLabel, QPlainTextEdit, QFileDialog

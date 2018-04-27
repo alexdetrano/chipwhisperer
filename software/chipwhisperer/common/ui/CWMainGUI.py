@@ -29,16 +29,23 @@ import traceback
 #We always import PySide first, to force usage of PySide over PyQt
 from chipwhisperer.common.ui.logger_widget import LoggingWidget
 
+PYSIDE_VERSION = None
 try:
     from PySide2.QtCore import *
     from PySide2.QtGui import *
+    PYSIDE_VERSION = 2
 except ImportError as e:
-    print("**********************************************")
-    print("ERROR: PySide2 is required for this program.\nTry installing with 'pip install pyside2' first.")
-    print("**********************************************\n\n")
+    try:
+        from PySide.QtCore import *
+        from PySide.QtGui import *
+        PYSIDE_VERSION = 1
+    except ImportError as e:
+        print("**********************************************")
+        print("ERROR: PySide2 or PySide is required for this program.\nTry installing with 'pip install pyside2' or 'pip install pyside'first.")
+        print("**********************************************\n\n")
 
-    print("Failed to import 'PySide2', original exception information:")
-    raise
+        print("Failed to import 'PySide2' or PySide, original exception information:")
+        raise
 
 try:
     import pyqtgraph
@@ -59,7 +66,14 @@ from chipwhisperer.common.ui.TraceManagerDialog import TraceManagerDialog
 from chipwhisperer.common.ui.ProjectTextEditor import ProjectTextEditor
 from chipwhisperer.common.utils import pluginmanager, util
 from chipwhisperer.common.results.base import ResultsBase
-import chipwhisperer.common.ui.qrc_resources
+
+# qrc_resources was recompiled for qt5 and python3
+# basically in python3, we use byte arrays, but in python2, we use strings
+if PYSIDE_VERSION == 2:
+    import chipwhisperer.common.ui.qrc_resources_pysides2_python3
+elif PYSIDE_VERSION == 1:
+    import chipwhisperer.common.ui.qrc_resources
+
 from pyqtgraph.parametertree import ParameterTree
 from chipwhisperer.common.utils.parameter import Parameter
 from chipwhisperer.common.utils import qt_tweaks

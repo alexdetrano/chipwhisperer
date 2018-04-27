@@ -23,8 +23,13 @@
 #    along with chipwhisperer.  If not, see <http://www.gnu.org/licenses/>.
 from functools import partial
 
-from PySide2.QtGui import *
-from PySide2.QtCore import *
+try:
+    from PySide2.QtGui import *
+    from PySide2.QtCore import *
+except ImportError:
+    from PySide.QtGui import *
+    from PySide.QtCore import *
+
 from .projectdiffwidget import ProjectDiffWidget
 
 

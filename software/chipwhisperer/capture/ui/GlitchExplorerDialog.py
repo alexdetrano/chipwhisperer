@@ -33,7 +33,7 @@ from datetime import datetime
 try:
     from PySide2.QtCore import *
     from PySide2.QtGui import *
-except ModuleNotFoundError:
+except ImportError:
     from PySide.QtCore import *
     from PySide.QtGui import *
 

@@ -28,7 +28,10 @@ from collections import OrderedDict
 import inspect
 import textwrap
 import linecache
-from PySide2.QtGui import QMessageBox
+try:
+    from PySide2.QtGui import QMessageBox
+except ImportError:
+    from PySide.QtGui import QMessageBox
 
 class AuxListObject(Parameterized):
     def __init__(self, func, parent, id):

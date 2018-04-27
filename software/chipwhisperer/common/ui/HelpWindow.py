@@ -6,10 +6,19 @@
 # This project is released under the Modified FreeBSD License. See LICENSE
 # file which should have came with this code.
 
-from PySide.QtGui import *
-from PySide.QtCore import *
+try:
+    from PySide2.QtGui import *
+    from PySide2.QtCore import *
+    # qt5 changed prefix 'QWeb' to 'QWebEngine'
+    # http://doc.qt.io/qt-5/qtwebenginewidgets-qtwebkitportingguide.html
+    from PySide2 import QtWebEngineWidgets
+    QtWebKit = QtWebEngineWidgets
+    QtWebKit.QWebView = QtWebEngineWidgets.QWebEngineView
+except ImportError:
+    from PySide.QtGui import *
+    from PySide.QtCore import *
+    from PySide import QtWebKit
 import chipwhisperer.common.utils.qt_tweaks as QtFixes
-from PySide import QtWebKit
 try:
     from docutils import core, io
 except ImportError:

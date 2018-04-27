@@ -1,5 +1,9 @@
-from PySide2.QtGui import *
-from PySide2.QtWidgets import *
+try:
+    from PySide2.QtGui import *
+    from PySide2.QtWidgets import *
+except ImportError:
+    from PySide.QtGui import *
+    from PySide.QtWidgets import *
 import logging
 """ Copied from: http://stackoverflow.com/questions/28655198/best-way-to-display-logs-in-pyqt """
 
@@ -70,7 +74,6 @@ class LoggingWidget(QWidget):
         self.setLayout(layout)
 
         # Connect signal to slot
-        self._level.activated[str].connect(self.setLevel)
         self._format.activated[str].connect(self.setFormat)
         self._clearBtn.clicked.connect(self.editor.widget.clear)
 
