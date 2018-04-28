@@ -67,7 +67,13 @@ class _QPythonConsoleInterpreter(_InteractiveConsole):
         if data:
             # Warning! This function enters C++ land where \0 marks the end of a string!
             # Make sure strings don't have null chars before they end by decoding them
-            data_sanitized = data.decode('utf-8')
+            #
+            # Python3 all strings are unicode by default
+            # only in python2 do we need to explicitly decode
+            try:
+                data_sanitized = data.decode('utf-8')
+            except AttributeError:
+                data_sanitized = data
 
             self.ui.output.moveCursor(QtGui.QTextCursor.End)
             self.ui.output.insertPlainText(data_sanitized)
