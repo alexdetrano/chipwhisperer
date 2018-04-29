@@ -89,7 +89,8 @@ class LoggingWidget(QWidget):
     def setLevel(self, levelName):
         # python3 changed the logging module
         # logging._levelNames no longer exists as a module attribute
-        # so we just set the logging level directly
+        # so we just set the logging level directly instead of querying
+        # logging._levelNames
         try:
             logging.getLogger().setLevel(logging._levelNames[levelName])
         except AttributeError:
