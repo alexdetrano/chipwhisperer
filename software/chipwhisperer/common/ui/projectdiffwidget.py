@@ -23,7 +23,7 @@
 #    along with chipwhisperer.  If not, see <http://www.gnu.org/licenses/>.
 from pyqtgraph.parametertree import Parameter, ParameterTree
 try:
-    from PySide2.QtGui import *
+    from PySide2.QWidget import *
 except ImportError:
     from PySide.QtGui import *
 

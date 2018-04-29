@@ -42,8 +42,13 @@ class Plugin(object):
 
 
 try:
-    from PySide.QtCore import *
-    from PySide.QtGui import *
+    try:
+        from PySide2.QtCore import *
+        from PySide2.QtGui import *
+        from PySide2.QtWidgets import QTableWidget, QTableWidgetItem
+    except ImportError:
+        from PySide.QtCore import *
+        from PySide.QtGui import *
 
     class PluginStatusDialog(QTableWidget):
         def __init__(self, parent=None):
@@ -74,6 +79,7 @@ try:
             self.show()
             self.raise_()
 
+# this exception means neither PySide nor PySide2 coudld be imported
 except ImportError:
     pass
 
