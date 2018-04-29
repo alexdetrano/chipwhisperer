@@ -33,6 +33,7 @@ PYSIDE_VERSION = None
 try:
     from PySide2.QtCore import *
     from PySide2.QtGui import *
+    from PySide2.QtWidgets import *
     PYSIDE_VERSION = 2
 except ImportError as e:
     try:
