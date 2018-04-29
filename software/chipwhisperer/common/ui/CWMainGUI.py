@@ -80,7 +80,7 @@ from chipwhisperer.common.utils import qt_tweaks
 from chipwhisperer.common.ui.HelpWindow import HelpBrowser
 from chipwhisperer.common.ui import ParameterTypesCustom
 from chipwhisperer.common.ui.PreferencesDialog import CWPreferencesDialog
-import urllib.request, urllib.parse, urllib.error
+import requests
 
 __author__ = "Colin O'Flynn"
 
@@ -362,7 +362,7 @@ class CWMainGUI(QMainWindow):
 
     def checkForUpdates(self):
         try:
-            source = urllib.request.urlopen("https://raw.githubusercontent.com/newaetech/chipwhisperer/master/software/chipwhisperer/common/api/CWCoreAPI.py")
+            source = requests.get("https://raw.githubusercontent.com/newaetech/chipwhisperer/master/software/chipwhisperer/common/api/CWCoreAPI.py")
             content = source.read()
 
             version = None
@@ -376,7 +376,7 @@ class CWMainGUI(QMainWindow):
                     message = "Your current version is already the most recent one."
                 else:
                     message = "There is an updated version available:\n"
-                    source = urllib.request.urlopen("https://raw.githubusercontent.com/newaetech/chipwhisperer/master/CHANGES.txt")
+                    source = requests.get("https://raw.githubusercontent.com/newaetech/chipwhisperer/master/CHANGES.txt")
                     content = source.read()
                     for line in content.split("\n"):
                         if self.api.__version__+":" in line:
