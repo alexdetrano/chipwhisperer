@@ -81,7 +81,7 @@ class TraceManager(TraceSource):
                 ti = TraceContainerNative()
                 try:
                     ti.config.loadTrace(fname)
-                except Exception, e:
+                except Exception as e:
                     logging.error(e.message)
                 self.traceSegments.append(ti)
             if t[0].startswith("enabled"):

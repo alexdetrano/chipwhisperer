@@ -226,7 +226,7 @@ class STM32FSerial(object):
 
                 status = "SUCCEEDED"
 
-            except IOError, e:
+            except IOError as e:
                 if logfunc: logfunc("FAILED: %s" % str(e))
                 try:
                     self.close_port()

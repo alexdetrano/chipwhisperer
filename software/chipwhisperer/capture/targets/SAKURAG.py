@@ -227,7 +227,7 @@ class FTDIComm(object):
     def con(self, scope=None):
         try:
             self.sasebo = ft.openEx(self.serNo)
-        except ft.ftd2xx.DeviceError, e:
+        except ft.ftd2xx.DeviceError as e:
             self.sasebo = None
             logging.error('Failed to find device: %s' % str(e))
             return False

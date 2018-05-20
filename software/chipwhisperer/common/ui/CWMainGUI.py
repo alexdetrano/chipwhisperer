@@ -32,7 +32,7 @@ from chipwhisperer.common.ui.logger_widget import LoggingWidget
 try:
     from PySide.QtCore import *
     from PySide.QtGui import *
-except ImportError, e:
+except ImportError as e:
     print("**********************************************")
     print("ERROR: PySide is required for this program.\nTry installing with 'pip install pyside' first.")
     print("**********************************************\n\n")
@@ -44,7 +44,7 @@ try:
     import pyqtgraph
     pyqtgraph.setConfigOption('background', 'w')
     pyqtgraph.setConfigOption('foreground', 'k')
-except ImportError, e:
+except ImportError as e:
     print("***********************************************")
     print("ERROR: PyQtGraph is required for this program.\nTry installing with 'pip install pyqtgraph' first.")
     print("***********************************************\n\n")

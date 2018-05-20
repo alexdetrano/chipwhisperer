@@ -30,7 +30,7 @@ from ._cfgfile import makeAttrDict
 
 try:
     import umysql as sql
-except ImportError, e:
+except ImportError as e:
     # This isn't really needed, no need to bother users
     # print "umysql required: https://pypi.python.org/pypi/umysql"
     raise ImportError(e)

@@ -115,7 +115,7 @@ class OpenADCInterface_NAEUSBChip(Parameterized, Plugin):
         try:
             self.scope.con(self.ser)
             logging.info('OpenADC Found, Connecting')
-        except IOError, e:
+        except IOError as e:
             exctype, value = sys.exc_info()[:2]
             raise IOError("OpenADC: " + (str(exctype) + str(value)))
 

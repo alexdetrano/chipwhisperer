@@ -257,8 +257,8 @@ class Parameter(object):
             else:
                 return val()
         except Exception as e:
-            raise type(e), type(e)(e.message +
-                                   ' happens on parameter "%s"' % self.getName()), sys.exc_info()[2]
+            raise type(e)(type(e)(e.message +
+                                  ' happens on parameter "%s"' % self.getName())).with_traceback(sys.exc_info()[2])
 
     def getKeyFromValue(self, value):
         """Return the key used to set list type parameters"""

@@ -217,7 +217,7 @@ class GainSettings(Parameterized, util.DisableNewAttr):
             self.oa.setSettings(self.oa.settings() & ~SETTINGS_GAIN_HIGH)
             self.gainlow_cached = True
         else:
-            raise ValueError, "Invalid Gain Mode, only 'low' or 'high' allowed"
+            raise ValueError("Invalid Gain Mode, only 'low' or 'high' allowed")
 
     def getMode(self):
         gain_high = self.oa.settings() & SETTINGS_GAIN_HIGH
@@ -249,7 +249,7 @@ class GainSettings(Parameterized, util.DisableNewAttr):
     def setGain(self, gain):
         '''Set the Gain range 0-78'''
         if (gain < 0) | (gain > 78):
-            raise ValueError,  "Invalid Gain, range 0-78 Only"
+            raise ValueError("Invalid Gain, range 0-78 Only")
 
         self.gain_cached = gain
 
@@ -780,7 +780,8 @@ class TriggerSettings(Parameterized,util.DisableNewAttr):
             trigmode = SETTINGS_TRIG_LOW | SETTINGS_WAIT_NO
 
         else:
-            raise ValueError,  "%s invalid trigger mode. Valid modes: 'rising edge', 'falling edge', 'high', 'low'"%mode
+            raise ValueError(
+                "%s invalid trigger mode. Valid modes: 'rising edge', 'falling edge', 'high', 'low'" % mode)
 
         cur = self.oa.settings() & ~(SETTINGS_TRIG_HIGH | SETTINGS_WAIT_YES)
         self.oa.setSettings(cur | trigmode)

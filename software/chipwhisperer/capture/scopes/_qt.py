@@ -93,7 +93,7 @@ class OpenADCQt(Parameterized):
 
         try:
             self.datapoints = self.sc.readData(numberPoints)
-        except IndexError, e:
+        except IndexError as e:
             raise IOError("Error reading data: %s" % str(e))
 
         self.dataUpdated.emit(channelNr, self.datapoints, -self.parm_trigger._get_presamples(True), self.parm_clock._adcSampleRate())

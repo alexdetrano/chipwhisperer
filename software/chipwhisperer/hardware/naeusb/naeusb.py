@@ -513,10 +513,10 @@ if __name__ == '__main__':
             print(test)
 
 
-        except TypeError, e:
+        except TypeError as e:
             print(str(e))
 
-        except IOError, e:
+        except IOError as e:
             print(str(e))
 
         xmega.enablePDI(False)

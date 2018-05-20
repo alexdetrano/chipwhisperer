@@ -65,7 +65,7 @@ class OpenADCInterface_ZTEX(Parameterized, Plugin):
 
             try:
                 dev = usb.core.find(idVendor=0x221A, idProduct=0x0100)
-            except IOError, e:
+            except IOError as e:
                 exctype, value = sys.exc_info()[:2]
                 raise IOError("FX2 Port " +  str(exctype) + str(value))
 
@@ -83,7 +83,7 @@ class OpenADCInterface_ZTEX(Parameterized, Plugin):
         try:
             self.scope.con(self.ser)
             logging.info('OpenADC Found, Connecting')
-        except IOError,e:
+        except IOError as e:
             exctype, value = sys.exc_info()[:2]
             raise IOError("OpenADC Error (FX2 Port): " + (str(exctype) + str(value)) + " - Did you download firmware/FPGA data to ChipWhisperer?")
 
