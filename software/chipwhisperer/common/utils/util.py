@@ -29,6 +29,8 @@ import os.path
 import shutil
 import weakref
 import numpy as np
+import operator
+import sys
 
 try:
     # OrderedDict is new in 2.7
@@ -37,6 +39,47 @@ try:
 except ImportError:
     DictType = dict
 
+# stolen from six module
+# Useful for very coarse version differentiation.
+PY2 = sys.version_info[0] == 2
+PY3 = sys.version_info[0] == 3
+PY34 = sys.version_info[0:2] >= (3, 4)
+if PY3:
+    def iterkeys(d, **kw):
+        return iter(d.keys(**kw))
+
+    def itervalues(d, **kw):
+        return iter(d.values(**kw))
+
+    def iteritems(d, **kw):
+        return iter(d.items(**kw))
+
+    def iterlists(d, **kw):
+        return iter(d.lists(**kw))
+
+    viewkeys = operator.methodcaller("keys")
+
+    viewvalues = operator.methodcaller("values")
+
+    viewitems = operator.methodcaller("items")
+else:
+    def iterkeys(d, **kw):
+        return d.iterkeys(**kw)
+
+    def itervalues(d, **kw):
+        return d.itervalues(**kw)
+
+    def iteritems(d, **kw):
+        return d.iteritems(**kw)
+
+    def iterlists(d, **kw):
+        return d.iterlists(**kw)
+
+    viewkeys = operator.methodcaller("viewkeys")
+
+    viewvalues = operator.methodcaller("viewvalues")
+
+viewitems = operator.methodcaller("viewitems")
 
 def getRootDir():
     path = os.path.join(os.path.dirname(__file__), "../../../")

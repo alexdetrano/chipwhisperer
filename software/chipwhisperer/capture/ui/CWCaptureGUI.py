@@ -34,7 +34,7 @@ from chipwhisperer.common.ui.ValidationDialog import ValidationDialog
 from chipwhisperer.common.utils import pluginmanager
 from chipwhisperer.common.utils.parameter import Parameter
 from chipwhisperer.common.utils.tracesource import ActiveTraceObserver
-
+from chipwhisperer.common.utils.util import iteritems
 
 class CWCaptureGUI(CWMainGUI):
     def __init__(self, api):
@@ -63,7 +63,7 @@ class CWCaptureGUI(CWMainGUI):
 
         # Load all ActiveTraceObservers
         self.windowMenu.addSeparator()
-        for k, v in ResultsBase.getClasses().iteritems():
+        for k, v in iteritems(ResultsBase.getClasses()):
             if issubclass(v, ActiveTraceObserver):
                 ResultsBase.createNew(k)
 

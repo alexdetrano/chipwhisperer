@@ -30,6 +30,7 @@ import copy
 import weakref
 
 from chipwhisperer.common.utils import util
+from chipwhisperer.common.utils.util import iteritems
 import functools
 
 #TODO: pyqtgraph raises a general Exception(), so we can't actually test for importerror. Perhaps should manually check
@@ -372,7 +373,7 @@ class Parameter(object):
             if not blockAction:
                 self.callAction()
             if isinstance(limits, dict):
-                for k, v in limits.iteritems():
+                for k, v in iteritems(limits):
                     if v == value:
                         value = k
 
