@@ -7,10 +7,20 @@
 # file which should have came with this code.
 
 from Qt.QtGui import *
-from Qt.QtWidgets import *
 from Qt.QtCore import *
+from Qt.QtWidgets import *
 import chipwhisperer.common.utils.qt_tweaks as QtFixes
-from Qt import QtWebKitWidgets
+# Qt.py does not include QtWebKitWidgets so we fall back to PySide/PySide2
+#from Qt import QtWebKitWidgets
+try:
+    from PySide2 import QtWebEngineWidgets
+    QtWebKit = QtWebEngineWidgets
+    QtWebKit.QWebView = QtWebEngineWidgets.QWebEngineView
+except ImportError:
+    #from PySide.QtGui import *
+    #from PySide.QtCore import *
+    from PySide import QtWebKit
+
 try:
     from docutils import core, io
 except ImportError:
@@ -89,7 +99,7 @@ if core is None:
             self.raise_()
             self.show()
 else:
-    class HelpBrowser(QtWebKitWidgets.QWebView):
+    class HelpBrowser(QtWebKit.QWebView):
 
         def __init__(self, parent=None):
             super(HelpBrowser, self).__init__(parent)
@@ -113,7 +123,7 @@ if __name__ == '__main__':
 
     test = html_body(unicode("test\n=====\n\nHello There."))
 
-    view = QtWebKitWidgets.QWebView(None)
+    view = QtWebKit.QWebView(None)
     # view.load(QUrl("http://www.google.com/"))
     view.setHtml(test)
 
