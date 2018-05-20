@@ -24,9 +24,10 @@
 #    along with chipwhisperer.  If not, see <http://www.gnu.org/licenses/>.
 #=================================================
 from functools import partial
+from PyQt5.QtWidgets import *
 import logging
 import numpy as np
-from PyQt4.QtGui import *
+from PyQt5.QtGui import *
 from chipwhisperer.analyzer.attacks._base import AttackObserver
 from .base import ResultsBase
 from chipwhisperer.common.ui.GraphWidget import GraphWidget

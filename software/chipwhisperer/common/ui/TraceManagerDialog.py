@@ -22,11 +22,12 @@
 #    You should have received a copy of the GNU General Public License
 #    along with chipwhisperer.  If not, see <http://www.gnu.org/licenses/>.
 import logging
+from PyQt5.QtWidgets import *
 import os.path
 import shutil
 import glob
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
 import chipwhisperer.common.utils.qt_tweaks as QtFixes
 try:
     from configparser import ConfigParser
@@ -94,7 +95,7 @@ class TraceManagerDialog(QtFixes.QDialog):
 
     def refresh(self):
         """Populates the table."""
-        self.disconnect(self.table, SIGNAL("cellChanged(int, int)"), self.cellChanged)
+        self.table.cellChanged[int, int].disconnect(self.cellChanged)
         self.table.setRowCount(len(self._traceManager.traceSegments))
         for p, t in enumerate(self._traceManager.traceSegments):
             if not self.table.cellWidget(p, 0): # check if the enable/disable button already exist
@@ -122,7 +123,7 @@ class TraceManagerDialog(QtFixes.QDialog):
                 logging.error('Sequence #%d should never be None: ' % p)
 
         self.table.horizontalHeader().setStretchLastSection(True)
-        self.connect(self.table, SIGNAL("cellChanged(int, int)"), self.cellChanged)
+        self.table.cellChanged[int, int].connect(self.cellChanged)
 
     def cellChanged(self, row, column):
         """Saves cell edition to the traceManager and .cfg file"""

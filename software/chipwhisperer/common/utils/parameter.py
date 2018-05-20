@@ -24,6 +24,7 @@
 # =================================================
 from __future__ import print_function
 import logging
+from PyQt5.QtWidgets import *
 import sys
 import copy
 import weakref

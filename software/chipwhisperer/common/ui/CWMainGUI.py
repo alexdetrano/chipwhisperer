@@ -22,6 +22,7 @@
 #    You should have received a copy of the GNU General Public License
 #    along with chipwhisperer.  If not, see <http://www.gnu.org/licenses/>.
 import logging
+from PyQt5.QtWidgets import *
 import sys
 import os
 import traceback
@@ -30,8 +31,8 @@ import traceback
 from chipwhisperer.common.ui.logger_widget import LoggingWidget
 
 try:
-    from PyQt4.QtCore import *
-    from PyQt4.QtGui import *
+    from PyQt5.QtCore import *
+    from PyQt5.QtGui import *
 except ImportError as e:
     print("**********************************************")
     print("ERROR: PySide is required for this program.\nTry installing with 'pip install pyside' first.")

@@ -26,10 +26,11 @@
 #=================================================
 
 from functools import partial
+from PyQt5.QtWidgets import *
 import numpy as np
 import copy
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
 import chipwhisperer.common.utils.qt_tweaks as QtFixes
 import pyqtgraph as pg
 from chipwhisperer.analyzer.utils.Partition import Partition

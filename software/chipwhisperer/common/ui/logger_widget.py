@@ -1,4 +1,5 @@
-from PyQt4.QtGui import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
 import logging
 """ Copied from: http://stackoverflow.com/questions/28655198/best-way-to-display-logs-in-pyqt """
 

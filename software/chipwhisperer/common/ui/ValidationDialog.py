@@ -25,7 +25,8 @@
 #    along with chipwhisperer.  If not, see <http://www.gnu.org/licenses/>.
 #=================================================
 
-from PyQt4.QtGui import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
 import chipwhisperer.common.utils.qt_tweaks as QtFixes
 
 
@@ -92,12 +93,12 @@ class ValidationDialog(QtFixes.QDialog):
         self.tableWarnings = QTableWidget(0, 4)
         self.tableWarnings.setSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.MinimumExpanding)
         self.tableWarnings.setHorizontalHeaderLabels(["Module", "Note", "Fix", "Demote"])
-        self.tableWarnings.horizontalHeader().setResizeMode(QHeaderView.Stretch)  # setStretchLastSection(True)
+        self.tableWarnings.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)  # setStretchLastSection(True)
 
         self.tableInfos = QTableWidget(0, 4)
         self.tableInfos.setSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.MinimumExpanding)
         self.tableInfos.setHorizontalHeaderLabels(["Module", "Note", "Fix", "Promote"])
-        self.tableInfos.horizontalHeader().setResizeMode(QHeaderView.Stretch)  # .setStretchLastSection(True)
+        self.tableInfos.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)  # .setStretchLastSection(True)
 
         fullTable = QWidget()
         fullLayout = QVBoxLayout()

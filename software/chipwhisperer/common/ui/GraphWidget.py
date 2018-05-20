@@ -22,9 +22,10 @@
 #    You should have received a copy of the GNU General Public License
 #    along with chipwhisperer.  If not, see <http://www.gnu.org/licenses/>.
 import logging
+from PyQt5.QtWidgets import *
 
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
 import chipwhisperer.common.utils.qt_tweaks as QtFixes
 import pyqtgraph as pg
 

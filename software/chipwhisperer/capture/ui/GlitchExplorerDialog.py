@@ -25,13 +25,14 @@
 
 # Python standard imports
 import logging
+from PyQt5.QtWidgets import *
 import math
 import pickle
 import sys
 from collections import OrderedDict
 from datetime import datetime
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
 from pyqtgraph.parametertree import ParameterTree
 import chipwhisperer.common.utils.qt_tweaks as QtFixes
 from chipwhisperer.common.utils.parameter import Parameterized, Parameter
@@ -94,7 +95,7 @@ class GlitchExplorerDialog(Parameterized, QtFixes.QDialog):
 
         #Do an update
         self.table.setSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.MinimumExpanding)
-        self.table.horizontalHeader().setResizeMode(QHeaderView.Interactive)
+        self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Interactive)
         self.clearTable()
         self._campaignRunning = False
 

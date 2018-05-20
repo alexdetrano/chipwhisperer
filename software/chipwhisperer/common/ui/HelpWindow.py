@@ -6,10 +6,11 @@
 # This project is released under the Modified FreeBSD License. See LICENSE
 # file which should have came with this code.
 
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
 import chipwhisperer.common.utils.qt_tweaks as QtFixes
-from PyQt4 import QtWebKit
+from PyQt5 import QtWebKitWidgets
 try:
     from docutils import core, io
 except ImportError:
@@ -88,7 +89,7 @@ if core is None:
             self.raise_()
             self.show()
 else:
-    class HelpBrowser(QtWebKit.QWebView):
+    class HelpBrowser(QtWebKitWidgets.QWebView):
 
         def __init__(self, parent=None):
             super(HelpBrowser, self).__init__(parent)
@@ -112,7 +113,7 @@ if __name__ == '__main__':
 
     test = html_body(unicode("test\n=====\n\nHello There."))
 
-    view = QtWebKit.QWebView(None)
+    view = QtWebKitWidgets.QWebView(None)
     # view.load(QUrl("http://www.google.com/"))
     view.setHtml(test)
 

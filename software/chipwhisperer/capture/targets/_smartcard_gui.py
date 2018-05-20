@@ -23,9 +23,10 @@
 #    along with chipwhisperer.  If not, see <http://www.gnu.org/licenses/>.
 #=================================================
 import logging
+from PyQt5.QtWidgets import *
 import sys
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
 
 from chipwhisperer.common.ui.CWMainGUI import CWMainGUI
 from chipwhisperer.common.utils.util import hexstr2list
@@ -140,9 +141,9 @@ class SmartCardGUICard(QtFixes.QDialog):
         self.table = QTableWidget(0,3)
         
         self.table.setSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.MinimumExpanding)
-        self.table.horizontalHeader().setResizeMode(0, QHeaderView.Interactive) 
-        self.table.horizontalHeader().setResizeMode(1, QHeaderView.Stretch) 
-        self.table.horizontalHeader().setResizeMode(2, QHeaderView.Interactive) 
+        self.table.horizontalHeader().setSectionResizeMode(0, QHeaderView.Interactive) 
+        self.table.horizontalHeader().setSectionResizeMode(1, QHeaderView.Stretch) 
+        self.table.horizontalHeader().setSectionResizeMode(2, QHeaderView.Interactive) 
         self.table.setHorizontalHeaderLabels(["Name", "APDU Transmit", "Response"])
         
         self.mainLayout.addWidget(self.table)

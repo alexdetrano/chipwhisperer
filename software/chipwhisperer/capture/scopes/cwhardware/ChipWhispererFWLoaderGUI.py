@@ -26,9 +26,10 @@
 #=================================================
 
 from chipwhisperer.capture.scopes.cwhardware.ChipWhispererSAM3Update import SAM3LoaderConfig
+from PyQt5.QtWidgets import *
 import chipwhisperer.capture.scopes.cwhardware.ChipWhispererFWLoader as ChipWhispererFWLoader
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
 import chipwhisperer.common.utils.qt_tweaks as QtFixes
 from chipwhisperer.common.ui.CWMainGUI import CWMainGUI
 

@@ -26,12 +26,13 @@
 #=================================================
 
 import imp
+from PyQt5.QtWidgets import *
 import uuid
 import tempfile
 import os.path, time
 
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
 
 from chipwhisperer.analyzer.utils.syntaxhighlighter import PythonHighlighter
 

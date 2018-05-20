@@ -30,6 +30,7 @@
 """
 
 import os
+from PyQt5.QtWidgets import *
 
 import pyqtgraph as pg
 from pyqtgraph.Qt import QtCore, QtGui
@@ -714,7 +715,7 @@ class FilelistItem(WidgetParameterItem):
         self.table.verticalHeader().hide()
         self.table.horizontalHeader().setStretchLastSection(True)
         self.table.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
-        # self.table.horizontalHeader().setResizeMode(QtGui.QHeaderView.Interactive)
+        # self.table.horizontalHeader().setSectionResizeMode(QtGui.QHeaderView.Interactive)
 
         self.setRows(0)
 

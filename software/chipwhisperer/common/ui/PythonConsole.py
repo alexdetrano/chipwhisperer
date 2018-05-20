@@ -14,7 +14,7 @@ import chipwhisperer
 import logging
 import os, sys, subprocess, shutil
 from code import InteractiveConsole as _InteractiveConsole
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui, QtWidgets
 from chipwhisperer.common.utils.util import requestConsoleBreak, updateUI
 from os.path import expanduser
 
@@ -32,7 +32,7 @@ class MyStringIO(StringIO):
         updateUI()
 
 
-class QInteractiveLineEdit(QtGui.QLineEdit):
+class QInteractiveLineEdit(QtWidgets.QLineEdit):
     """Improved QLineEdit for Python console
 
     Handles tab keys and emits signal for Ctrl-C
@@ -41,7 +41,7 @@ class QInteractiveLineEdit(QtGui.QLineEdit):
     sigCtrlCPressed = QtCore.Signal()
 
     def __init__(self, *args):
-        QtGui.QLineEdit.__init__(self, *args)
+        QtWidgets.QLineEdit.__init__(self, *args)
 
     def event(self, event):
         if (event.type() == QtCore.QEvent.KeyPress):
@@ -51,7 +51,7 @@ class QInteractiveLineEdit(QtGui.QLineEdit):
             elif event.key() == QtCore.Qt.Key_C and (event.modifiers() & QtCore.Qt.ControlModifier):
                 requestConsoleBreak()
 
-        return QtGui.QLineEdit.event(self, event)
+        return QtWidgets.QLineEdit.event(self, event)
 
 class _QPythonConsoleInterpreter(_InteractiveConsole):
     """InteractiveConsole subclass that sends all output to the GUI."""
@@ -88,17 +88,17 @@ class _QPythonConsoleUI(object):
     """UI layout container for QPythonConsole."""
     def __init__(self,parent):
         if parent.layout() is None:
-            parent.setLayout(QtGui.QHBoxLayout())
+            parent.setLayout(QtWidgets.QHBoxLayout())
 
         # Monospace font
         font = QtGui.QFont("Courier")
         font.setStyleHint(QtGui.QFont.Monospace)
 
-        layout = QtGui.QVBoxLayout()
+        layout = QtWidgets.QVBoxLayout()
         layout.setSpacing(0)
 
         # Output console: a fixed-pitch-font text area
-        self.output = QtGui.QPlainTextEdit(parent)
+        self.output = QtWidgets.QPlainTextEdit(parent)
         self.output.setReadOnly(True)
         self.output.setUndoRedoEnabled(False)
         self.output.setMaximumBlockCount(5000)
@@ -108,8 +108,8 @@ class _QPythonConsoleUI(object):
         parent.layout().addLayout(layout)
 
         # Input console, a prompt displated next to a lineedit
-        layout2 = QtGui.QHBoxLayout()
-        self.prompt = QtGui.QLabel(parent)
+        layout2 = QtWidgets.QHBoxLayout()
+        self.prompt = QtWidgets.QLabel(parent)
         self.prompt.setText(">>> ")
         layout2.addWidget(self.prompt)
         self.input = QInteractiveLineEdit(parent)
@@ -119,7 +119,7 @@ class _QPythonConsoleUI(object):
         layout.addLayout(layout2)
 
 
-class QPythonConsole(QtGui.QWidget):
+class QPythonConsole(QtWidgets.QWidget):
     """A simple python console to embed in your GUI.
 
     This widget provides a simple interactive python console that you can
@@ -181,7 +181,7 @@ class QPythonConsole(QtGui.QWidget):
         self.ui.input.setText(line)
         self.ui.input.end(False)
 
-class CWPythonFileTree(QtGui.QTreeView):
+class CWPythonFileTree(QtWidgets.QTreeView):
     """Customized QTreeView that only displays Python files.
 
     Optional parameter in __init__: root sets up base directory for file tree
@@ -189,7 +189,7 @@ class CWPythonFileTree(QtGui.QTreeView):
 
     def __init__(self, root=None, parent=None):
         super(CWPythonFileTree, self).__init__(parent)
-        model = QtGui.QFileSystemModel()
+        model = QtWidgets.QFileSystemModel()
         if root is not None:
             model.setRootPath(root)
         else:
@@ -223,7 +223,7 @@ class CWPythonFileTree(QtGui.QTreeView):
         self.setCurrentIndex(self.model().index(path))
 
 
-class CWPythonRecentTable(QtGui.QTableWidget):
+class CWPythonRecentTable(QtWidgets.QTableWidget):
     """A table view that stores a list of recently run files
 
     Also allows files to be pinned
@@ -251,9 +251,9 @@ class CWPythonRecentTable(QtGui.QTableWidget):
         self.setHorizontalHeaderLabels([
             'Recent Files',
         ])
-        self.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
-        self.setSelectionMode(QtGui.QAbstractItemView.SingleSelection)
-        self.horizontalHeader().setResizeMode(0, QtGui.QHeaderView.Stretch)
+        self.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
+        self.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
+        self.horizontalHeader().setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
 
         self._listsUpdated()
 
@@ -284,7 +284,7 @@ class CWPythonRecentTable(QtGui.QTableWidget):
                 path = ""
 
             short_path = os.path.basename(path)
-            item = QtGui.QTableWidgetItem(short_path)
+            item = QtWidgets.QTableWidgetItem(short_path)
             item.setFlags(item.flags() & ~QtCore.Qt.ItemIsEditable)
             item.setToolTip(path)
             item.setBackground(bg_color)
@@ -384,7 +384,7 @@ class CWPythonRecentTable(QtGui.QTableWidget):
         else:
             return
 
-        menu = QtGui.QMenu(self)
+        menu = QtWidgets.QMenu(self)
         if item_pinned:
             action_name = "Unpin From Top"
         else:
@@ -414,7 +414,7 @@ class CWPythonRecentTable(QtGui.QTableWidget):
         return None
 
 
-class QPythonScriptBrowser(QtGui.QWidget):
+class QPythonScriptBrowser(QtWidgets.QWidget):
     """A script browser with 3 tabs to help find Python files:
     1. ChipWhisperer directory
     2. Root of file system
@@ -429,7 +429,7 @@ class QPythonScriptBrowser(QtGui.QWidget):
     def __init__(self, parent=None, default="capture"):
         super(QPythonScriptBrowser,self).__init__(parent)
 
-        self.tab_bar = QtGui.QTabBar()
+        self.tab_bar = QtWidgets.QTabBar()
         self.tab_bar.addTab("ChipWhisperer")
         self.tab_bar.addTab("Project")
         self.tab_bar.addTab("File System")
@@ -453,7 +453,7 @@ class QPythonScriptBrowser(QtGui.QWidget):
         self.file_view_all = CWPythonFileTree()
         self.file_view_recent = CWPythonRecentTable()
 
-        layout = QtGui.QVBoxLayout()
+        layout = QtWidgets.QVBoxLayout()
         layout.addWidget(self.tab_bar)
         layout.addWidget(self.file_view_cw)
         layout.addWidget(self.file_view_project)
@@ -465,14 +465,10 @@ class QPythonScriptBrowser(QtGui.QWidget):
         self.tabChanged(0)
 
         # New style signals causes crashes on at least some platforms, so need to use old style
-        self.connect(self.file_view_cw.selectionModel(), QtCore.SIGNAL("selectionChanged(QItemSelection , QItemSelection )"),
-                 self, QtCore.SLOT("selectionChanged(QItemSelection, QItemSelection)"))
-        self.connect(self.file_view_project.selectionModel(), QtCore.SIGNAL("selectionChanged(QItemSelection , QItemSelection )"),
-                 self, QtCore.SLOT("selectionChanged(QItemSelection, QItemSelection)"))
-        self.connect(self.file_view_all.selectionModel(), QtCore.SIGNAL("selectionChanged(QItemSelection , QItemSelection )"),
-                 self, QtCore.SLOT("selectionChanged(QItemSelection, QItemSelection)"))
-        self.connect(self.file_view_recent.selectionModel(), QtCore.SIGNAL("selectionChanged(QItemSelection , QItemSelection )"),
-                 self, QtCore.SLOT("selectionChanged(QItemSelection, QItemSelection)"))
+        self.file_view_cw.selectionModel().selectionChanged[QItemSelection, QItemSelection].connect(self.selectionChanged)
+        self.file_view_project.selectionModel().selectionChanged[QItemSelection, QItemSelection].connect(self.selectionChanged)
+        self.file_view_all.selectionModel().selectionChanged[QItemSelection, QItemSelection].connect(self.selectionChanged)
+        self.file_view_recent.selectionModel().selectionChanged[QItemSelection, QItemSelection].connect(self.selectionChanged)
 
         self.file_view_cw.activated.connect(self.selectionConfirmed)
         self.file_view_all.activated.connect(self.selectionConfirmed)
@@ -532,13 +528,13 @@ class QPythonScriptBrowser(QtGui.QWidget):
     def addRecentFile(self, path):
         self.file_view_recent.addScript(path)
 
-class DialogWithCheckBox(QtGui.QMessageBox):
+class DialogWithCheckBox(QtWidgets.QMessageBox):
     """Reimplementation of QMessageBox that adds checkbox"""
 
     def __init__(self, parent= None):
         super(DialogWithCheckBox, self).__init__()
 
-        self.checkbox = QtGui.QCheckBox("Don't show me this crap")
+        self.checkbox = QtWidgets.QCheckBox("Don't show me this crap")
         #Access the Layout of the MessageBox to add the Checkbox
         layout = self.layout()
         layout.addWidget(self.checkbox, 3,1)
@@ -547,9 +543,9 @@ class DialogWithCheckBox(QtGui.QMessageBox):
         """
         Override the exec_ method so you can return the value of the checkbox
         """
-        return QtGui.QMessageBox.exec_(self, *args, **kwargs), self.checkbox.isChecked()
+        return QtWidgets.QMessageBox.exec_(self, *args, **kwargs), self.checkbox.isChecked()
 
-class QPythonScriptRunner(QtGui.QWidget):
+class QPythonScriptRunner(QtWidgets.QWidget):
     def __init__(self, console, parent=None):
         super(QPythonScriptRunner,self).__init__(parent)
         self.console = console
@@ -564,27 +560,27 @@ class QPythonScriptRunner(QtGui.QWidget):
             sccmdtype = None
         self.browser = QPythonScriptBrowser(default=sccmdtype)
 
-        self.file_preview = QtGui.QTextEdit()
+        self.file_preview = QtWidgets.QTextEdit()
         self.file_preview.setReadOnly(True)
 
         self.browser.sigSelectionChanged.connect(self.viewScript)
 
-        self.run_button = QtGui.QPushButton("Run")
+        self.run_button = QtWidgets.QPushButton("Run")
         self.run_button.clicked.connect(self.runScript)
         self.browser.sigSelectionConfirmed.connect(self.runScript)
 
-        self.edit_button = QtGui.QPushButton("Edit")
+        self.edit_button = QtWidgets.QPushButton("Edit")
         self.edit_button.clicked.connect(self.editScript)
 
-        self.editcopy_button = QtGui.QPushButton("Edit Copy")
+        self.editcopy_button = QtWidgets.QPushButton("Edit Copy")
         self.editcopy_button.clicked.connect(self.editCopyScript)
 
-        self.hide_button = QtGui.QPushButton("<")
+        self.hide_button = QtWidgets.QPushButton("<")
         self.hide_button.setFixedWidth(20)
-        self.hide_button.setSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Expanding)
+        self.hide_button.setSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Expanding)
         self.hide_button.clicked.connect(self.toggleBrowser)
 
-        button_layout = QtGui.QHBoxLayout()
+        button_layout = QtWidgets.QHBoxLayout()
         button_layout.addWidget(self.run_button)
         button_layout.addSpacing(20)
         button_layout.addWidget(self.edit_button)
@@ -592,14 +588,14 @@ class QPythonScriptRunner(QtGui.QWidget):
         button_layout.addWidget(self.editcopy_button)
         button_layout.addStretch()
 
-        preview_layout = QtGui.QVBoxLayout()
+        preview_layout = QtWidgets.QVBoxLayout()
         preview_layout.addWidget(self.file_preview)
         preview_layout.addSpacing(10)
         preview_layout.addItem(button_layout)
-        preview_box = QtGui.QGroupBox("Script Preview (Read Only)")
+        preview_box = QtWidgets.QGroupBox("Script Preview (Read Only)")
         preview_box.setLayout(preview_layout)
 
-        layout = QtGui.QHBoxLayout()
+        layout = QtWidgets.QHBoxLayout()
         layout.addWidget(self.browser)
         layout.addWidget(self.hide_button)
         layout.addWidget(preview_box)
@@ -609,13 +605,13 @@ class QPythonScriptRunner(QtGui.QWidget):
         """Run the currently selected script"""
         path = self.browser.getSelectedPath()
         if path is None or not os.path.isfile(path):
-            error_dialog = QtGui.QMessageBox()
+            error_dialog = QtWidgets.QMessageBox()
             error_dialog.warning(
                 self,
                 "Python Console",
                 "Error in Python Console: Selected path %s is not a file" % path,
-                QtGui.QMessageBox.Ok,
-                QtGui.QMessageBox.NoButton
+                QtWidgets.QMessageBox.Ok,
+                QtWidgets.QMessageBox.NoButton
             )
         else:
             self.console.runLine("execfile('%s')" % path)
@@ -629,7 +625,7 @@ class QPythonScriptRunner(QtGui.QWidget):
         if os.path.isfile(path):
             # Ask user for new filename
             base = os.path.basename(path)
-            result = QtGui.QInputDialog.getText(self, "Copy Script " + base,
+            result = QtWidgets.QInputDialog.getText(self, "Copy Script " + base,
                                        "Enter new script name:", text = ("COPY_" + base))
             if result[1]:
                 #User hit OK
@@ -689,17 +685,17 @@ class QPythonScriptRunner(QtGui.QWidget):
             # differentiate between file not existing and the text editor file failing to open the
             # file for editing
             if open_editor_error:
-                errorMsgBox = QtGui.QMessageBox()
+                errorMsgBox = QtWidgets.QMessageBox()
                 errorMsgBox.setWindowTitle("Requested Editor Not Valid")
                 errorMsgBox.setText("The editor requested is not valid")
                 errorMsgBox.setInformativeText("The path to your preferred text editor is invalid, please set "
                                                "a valid text editor path using 'Help-->Preferences' and "
                                                "changing the path value for the 'External Text Editor' field.")
-                errorMsgBox.setIcon(QtGui.QMessageBox.Warning)
-                errorMsgBox.addButton(QtGui.QMessageBox.Ok)
-                errorMsgBox.setDefaultButton(QtGui.QMessageBox.Ok)
+                errorMsgBox.setIcon(QtWidgets.QMessageBox.Warning)
+                errorMsgBox.addButton(QtWidgets.QMessageBox.Ok)
+                errorMsgBox.setDefaultButton(QtWidgets.QMessageBox.Ok)
                 user_response = errorMsgBox.exec_()
-                if user_response == QtGui.QMessageBox.Ok:
+                if user_response == QtWidgets.QMessageBox.Ok:
                     return
 
             if open_with_default:
@@ -718,16 +714,16 @@ class QPythonScriptRunner(QtGui.QWidget):
                                       "goto 'Help-->Preferences' and configure your preferred text "
                                       "editor for script files instead. If you hit 'OK' here I will attempt "
                                       "to open the named script file now.")
-            msgbox.setIcon(QtGui.QMessageBox.Question)
-            msgbox.addButton(QtGui.QMessageBox.Ok)
-            msgbox.addButton(QtGui.QMessageBox.Cancel)
-            msgbox.setDefaultButton(QtGui.QMessageBox.Ok)
+            msgbox.setIcon(QtWidgets.QMessageBox.Question)
+            msgbox.addButton(QtWidgets.QMessageBox.Ok)
+            msgbox.addButton(QtWidgets.QMessageBox.Cancel)
+            msgbox.setDefaultButton(QtWidgets.QMessageBox.Ok)
             user_resp = msgbox.exec_()
 
             if user_resp[1] == True:
                 self.api.settings.setValue('text-editor-dont-check', True)
 
-            if user_resp[0] == QtGui.QMessageBox.Cancel:
+            if user_resp[0] == QtWidgets.QMessageBox.Cancel:
                 return
 
         if sys.platform == "win32":
@@ -756,7 +752,7 @@ class QPythonScriptRunner(QtGui.QWidget):
             button_text = ">"
         self.hide_button.setText(button_text)
 
-class QSplitConsole(QtGui.QSplitter):
+class QSplitConsole(QtWidgets.QSplitter):
     def __init__(self, parent=None, locals=None):
         super(QSplitConsole,self).__init__(parent)
         self.console = QPythonConsole(parent, locals)
@@ -769,8 +765,8 @@ class QSplitConsole(QtGui.QSplitter):
 
 if __name__ == "__main__":
     import sys
-    app = QtGui.QApplication(sys.argv)
-    win = QtGui.QMainWindow()
+    app = QtWidgets.QApplication(sys.argv)
+    win = QtWidgets.QMainWindow()
     win.setCentralWidget(QPythonConsole())
     win.show()
     app.exec_()

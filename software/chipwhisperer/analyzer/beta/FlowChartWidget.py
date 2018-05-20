@@ -23,10 +23,11 @@
 #    along with chipwhisperer.  If not, see <http://www.gnu.org/licenses/>.
 
 import sys
+from PyQt5.QtWidgets import *
 
 try:
-    from PyQt4.QtCore import *
-    from PyQt4.QtGui import *
+    from PyQt5.QtCore import *
+    from PyQt5.QtGui import *
 except ImportError:
     print("ERROR: PySide is required for this program")
     sys.exit()
