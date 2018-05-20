@@ -28,7 +28,10 @@ import glob
 from PySide.QtCore import *
 from PySide.QtGui import *
 import chipwhisperer.common.utils.qt_tweaks as QtFixes
-import ConfigParser
+try:
+    from configparser import ConfigParser
+except ImportError:
+    from ConfigParser import ConfigParser
 import chipwhisperer.common.traces._cfgfile
 import chipwhisperer.common.traces.TraceContainerNative
 from chipwhisperer.common.traces.TraceContainerDPAv3 import ImportDPAv3Dialog
