@@ -23,7 +23,7 @@
 #==========================================================================
 import logging, os, time
 from datetime import datetime
-from naeusb import packuint32
+from .naeusb import packuint32
 from chipwhisperer.capture.utils.programming_files import FileReader
 
 XMEGAMEM_TYPE_APP = 1

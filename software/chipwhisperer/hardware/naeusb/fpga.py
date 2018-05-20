@@ -25,7 +25,7 @@
 
 import time
 import logging
-from naeusb import packuint32
+from .naeusb import packuint32
 
 class FPGA(object):
 

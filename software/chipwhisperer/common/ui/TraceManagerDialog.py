@@ -33,7 +33,7 @@ import chipwhisperer.common.traces._cfgfile
 import chipwhisperer.common.traces.TraceContainerNative
 from chipwhisperer.common.traces.TraceContainerDPAv3 import ImportDPAv3Dialog
 from chipwhisperer.common.utils import util
-from TraceManagerImport import TraceManagerImport
+from .TraceManagerImport import TraceManagerImport
 
 __author__ = "Colin O'Flynn"
 

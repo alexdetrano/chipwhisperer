@@ -25,8 +25,8 @@
 import logging
 import pickle
 import numpy as np
-from _base import TraceContainer
-from _cfgfile import makeAttrDict
+from ._base import TraceContainer
+from ._cfgfile import makeAttrDict
 
 try:
     import umysql as sql

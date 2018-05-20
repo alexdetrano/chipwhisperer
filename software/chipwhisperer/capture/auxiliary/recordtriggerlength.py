@@ -24,7 +24,7 @@
 #=================================================
 import copy
 from chipwhisperer.common.api.CWCoreAPI import CWCoreAPI
-from _base import AuxiliaryTemplate
+from ._base import AuxiliaryTemplate
 
 class RecordTriggerLength(object):
     attrDictTriggerLength = {

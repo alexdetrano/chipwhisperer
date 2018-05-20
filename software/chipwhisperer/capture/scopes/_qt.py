@@ -24,7 +24,7 @@
 #=================================================
 import logging
 
-import _OpenADCInterface as openadc
+from . import _OpenADCInterface as openadc
 from chipwhisperer.common.utils.parameter import Parameterized, Parameter
 from chipwhisperer.common.utils import util, timer
 

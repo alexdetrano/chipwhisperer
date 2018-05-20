@@ -30,7 +30,7 @@ import traceback
 
 import imp
 
-import util
+from . import util
 from chipwhisperer.common.api.settings import Settings
 
 loadedItems = []

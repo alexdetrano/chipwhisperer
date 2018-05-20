@@ -26,7 +26,7 @@ from datetime import datetime
 from chipwhisperer.common.utils import util
 from chipwhisperer.capture.utils.IntelHex import IntelHex
 
-from naeusb import packuint32
+from .naeusb import packuint32
 
 # NOTE: These objects are currently manually maintained. Eventually it will be automatically created
 #      from avrdude.conf, but I'd like to test with a few more devices before doing that.

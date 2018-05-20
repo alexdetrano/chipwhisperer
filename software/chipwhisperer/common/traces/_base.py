@@ -26,7 +26,7 @@ import copy
 import logging
 import re
 import numpy as np
-import _cfgfile
+from . import _cfgfile
 from chipwhisperer.common.utils.pluginmanager import Plugin
 from chipwhisperer.common.utils.parameter import Parameterized, Parameter
 

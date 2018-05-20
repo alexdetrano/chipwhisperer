@@ -28,7 +28,7 @@ import logging
 import time
 from collections import OrderedDict
 from functools import partial
-import ChipWhispererGlitch
+from . import ChipWhispererGlitch
 from chipwhisperer.common.utils.parameter import Parameterized, Parameter, setupSetParam
 from chipwhisperer.common.utils import util
 

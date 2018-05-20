@@ -52,8 +52,8 @@ except ImportError, e:
     print("Failed to import 'pyqtgraph', full exception trace given below in case it's another problem:")
     raise
 from datetime import datetime
-from PythonConsole import QPythonConsole
-from saveproject import SaveProjectDialog
+from .PythonConsole import QPythonConsole
+from .saveproject import SaveProjectDialog
 from chipwhisperer.common.api.CWCoreAPI import CWCoreAPI
 from chipwhisperer.common.ui.TraceManagerDialog import TraceManagerDialog
 from chipwhisperer.common.ui.ProjectTextEditor import ProjectTextEditor

@@ -30,7 +30,7 @@ from usb import USBError
 import binascii
 from ._base import TargetTemplate
 from chipwhisperer.common.utils import pluginmanager, util
-from simpleserial_readers.cwlite import SimpleSerial_ChipWhispererLite
+from .simpleserial_readers.cwlite import SimpleSerial_ChipWhispererLite
 from chipwhisperer.common.utils.parameter import setupSetParam
 from chipwhisperer.common.utils import util
 from collections import OrderedDict

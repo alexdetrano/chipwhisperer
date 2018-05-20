@@ -440,10 +440,10 @@ class NAEUSB(object):
 
 
 if __name__ == '__main__':
-    from fpga import FPGA
-    from programmer_avr import AVRISP
-    from programmer_xmega import XMEGAPDI, supported_xmega
-    from serial import USART
+    from .fpga import FPGA
+    from .programmer_avr import AVRISP
+    from .programmer_xmega import XMEGAPDI, supported_xmega
+    from .serial import USART
 
     cwtestusb = NAEUSB()
     cwtestusb.con()

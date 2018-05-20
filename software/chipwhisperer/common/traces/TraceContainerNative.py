@@ -24,7 +24,7 @@
 
 import os
 import numpy as np
-from _base import TraceContainer
+from ._base import TraceContainer
 
 
 class TraceContainerNative(TraceContainer):
