@@ -64,8 +64,8 @@ def dict_keys_g(dikt):  # dict keys generator
 def dict_items_g(dikt):  # dict items generator
     return dikt.items()
 
-from cStringIO import StringIO
-BytesIO = StringIO
+from io import BytesIO     # for handling byte strings
+from io import StringIO    # for handling unicode strings
 
 class _DeprecatedParam(object):
     pass

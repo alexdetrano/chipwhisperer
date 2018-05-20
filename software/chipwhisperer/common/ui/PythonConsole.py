@@ -19,7 +19,7 @@ from chipwhisperer.common.utils.util import requestConsoleBreak, updateUI
 from os.path import expanduser
 
 # Note: we'd like to use cStringIO (it's faster) but we can't subclass it
-from StringIO import StringIO
+from io import StringIO
 
 class MyStringIO(StringIO):
     """Custom StringIO class - prints everything to console"""
