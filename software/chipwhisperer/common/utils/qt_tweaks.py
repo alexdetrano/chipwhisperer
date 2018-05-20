@@ -25,24 +25,23 @@
 #    along with chipwhisperer.  If not, see <http://www.gnu.org/licenses/>.
 #=================================================
 
-import PySide.QtCore as qtc
-import PySide.QtGui as qtg
+from Qt import QtWidgets
+from Qt import QtCore
 
-
-class QLineEdit(qtg.QLineEdit):
+class QLineEdit(QtWidgets.QLineEdit):
     """Fixes a bug with Mac OS where the Frame would flicker the second time you call show()"""
     def __init__(self, *args, **kwargs):
         super(QLineEdit, self).__init__(*args, **kwargs)
-        self.setAttribute(qtc.Qt.WA_MacShowFocusRect, False)
+        self.setAttribute(QtCore.Qt.WA_MacShowFocusRect, False)
 
-class QDialog(qtg.QDialog):
+class QDialog(QtWidgets.QDialog):
     """Makes it easy to show and raise the window at the same time"""
     def show(self, *args, **kwargs):
         super(QDialog, self).show(*args, **kwargs)
         self.raise_()
 
-class QTextBrowser(qtg.QTextBrowser):
+class QTextBrowser(QtWidgets.QTextBrowser):
     def write(self, text):
-        self.moveCursor(qtg.QTextCursor.End)
+        self.moveCursor(QtWidgets.QTextCursor.End)
         self.insertPlainText(text)
-        self.moveCursor(qtg.QTextCursor.End)
+        self.moveCursor(QtWidgets.QTextCursor.End)
