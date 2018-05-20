@@ -50,12 +50,25 @@ import sys
 asbytes = str
 asstr = str
 
-IntTypes = (int, long)
-StrType = basestring
-UnicodeType = unicode
+# python2
+if sys.version_info < (3,):
+    IntTypes = (int, long)
+    StrType = basestring
+    UnicodeType = unicode
+    range_g = xrange  # range generator
+    range_l = range  # range list
+    from cStringIO import StringIO
+    BytesIO = StringIO
+    # python3
+else:
+    IntTypes = (int,)
+    StrType = str
+    UnicodeType = str
+    range_g = range  # range generator
+    range_l = range  # range list
+    from io import BytesIO  # for handling byte strings
+    from io import StringIO  # for handling unicode strings
 
-range_g = xrange  # range generator
-range_l = range  # range list
 
 def dict_keys(dikt):  # dict keys list
     return dikt.keys()
@@ -64,8 +77,6 @@ def dict_keys_g(dikt):  # dict keys generator
 def dict_items_g(dikt):  # dict items generator
     return dikt.items()
 
-from io import BytesIO     # for handling byte strings
-from io import StringIO    # for handling unicode strings
 
 class _DeprecatedParam(object):
     pass
