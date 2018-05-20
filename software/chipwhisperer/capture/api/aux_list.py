@@ -28,7 +28,7 @@ from collections import OrderedDict
 import inspect
 import textwrap
 import linecache
-from PyQt5.QtWidgets import QMessageBox
+from Qt.QtWidgets import QMessageBox
 
 class AuxListObject(Parameterized):
     def __init__(self, func, parent, id):

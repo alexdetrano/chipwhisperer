@@ -14,7 +14,7 @@ import chipwhisperer
 import logging
 import os, sys, subprocess, shutil
 from code import InteractiveConsole as _InteractiveConsole
-from PyQt5 import QtCore, QtGui, QtWidgets
+from Qt import QtCore, QtGui, QtWidgets
 from chipwhisperer.common.utils.util import requestConsoleBreak, updateUI
 from os.path import expanduser
 

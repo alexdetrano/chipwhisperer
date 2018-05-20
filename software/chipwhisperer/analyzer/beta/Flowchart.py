@@ -29,7 +29,7 @@
 #    along with chipwhisperer.  If not, see <http://www.gnu.org/licenses/>.
 
 from pyqtgraph.Qt import QtCore, QtGui, USE_PYSIDE
-from PyQt5.QtWidgets import *
+from Qt.QtWidgets import *
 from pyqtgraph.flowchart.Node import *
 from pyqtgraph.pgcollections import OrderedDict
 from pyqtgraph.widgets.TreeWidget import *

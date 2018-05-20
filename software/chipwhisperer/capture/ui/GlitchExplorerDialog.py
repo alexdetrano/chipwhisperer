@@ -25,14 +25,14 @@
 
 # Python standard imports
 import logging
-from PyQt5.QtWidgets import *
+from Qt.QtWidgets import *
 import math
 import pickle
 import sys
 from collections import OrderedDict
 from datetime import datetime
-from PyQt5.QtCore import *
-from PyQt5.QtGui import *
+from Qt.QtCore import *
+from Qt.QtGui import *
 from pyqtgraph.parametertree import ParameterTree
 import chipwhisperer.common.utils.qt_tweaks as QtFixes
 from chipwhisperer.common.utils.parameter import Parameterized, Parameter

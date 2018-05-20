@@ -23,10 +23,10 @@
 #    along with chipwhisperer.  If not, see <http://www.gnu.org/licenses/>.
 #=================================================
 import logging
-from PyQt5.QtWidgets import *
+from Qt.QtWidgets import *
 import sys
-from PyQt5.QtCore import *
-from PyQt5.QtGui import *
+from Qt.QtCore import *
+from Qt.QtGui import *
 
 from chipwhisperer.common.ui.CWMainGUI import CWMainGUI
 from chipwhisperer.common.utils.util import hexstr2list

@@ -58,7 +58,7 @@ class FakeQTimer(object):
         self._single_shot = single_shot
 
 try:
-    from PyQt5.QtCore import QTimer
+    from Qt.QtCore import QTimer
 
     class PatchedQTimer(QTimer):
         def flush(self):

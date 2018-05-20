@@ -25,9 +25,9 @@
 
 
 import os.path
-from PyQt5.QtWidgets import *
-from PyQt5.QtCore import *
-from PyQt5.QtGui import *
+from Qt.QtWidgets import *
+from Qt.QtCore import *
+from Qt.QtGui import *
 try:
     import chipwhisperer.common.utils.serialport as scan
 except ImportError:

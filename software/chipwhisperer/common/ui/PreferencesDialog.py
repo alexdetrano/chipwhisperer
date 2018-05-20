@@ -22,8 +22,8 @@
 #    You should have received a copy of the GNU General Public License
 #    along with chipwhisperer.  If not, see <http://www.gnu.org/licenses/>.
 
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
+from Qt.QtGui import *
+from Qt.QtWidgets import *
 from pyqtgraph.parametertree import ParameterTree
 import chipwhisperer.common.utils.qt_tweaks as QtFixes
 from chipwhisperer.common.utils.parameter import Parameterized

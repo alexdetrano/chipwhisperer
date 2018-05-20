@@ -26,8 +26,8 @@
 #
 #=================================================
 
-from PyQt5.QtCore import *
-from PyQt5.QtGui import *
+from Qt.QtCore import *
+from Qt.QtGui import *
 
 # syntax.py
 def fontformat(color, style=''):

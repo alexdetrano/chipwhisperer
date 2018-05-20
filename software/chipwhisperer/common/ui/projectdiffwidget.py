@@ -22,8 +22,8 @@
 #    You should have received a copy of the GNU General Public License
 #    along with chipwhisperer.  If not, see <http://www.gnu.org/licenses/>.
 from pyqtgraph.parametertree import Parameter, ParameterTree
-from PyQt5.QtWidgets import *
-from PyQt5.QtGui import *
+from Qt.QtWidgets import *
+from Qt.QtGui import *
 
 
 class ProjectDiffWidget(QWidget):

@@ -24,12 +24,12 @@
 #    along with chipwhisperer.  If not, see <http://www.gnu.org/licenses/>.
 #=================================================
 import logging
-from PyQt5.QtWidgets import *
+from Qt.QtWidgets import *
 import sys
 from chipwhisperer.common.ui.CWMainGUI import CWMainGUI, makeApplication
-from PyQt5.QtGui import (
+from Qt.QtGui import (
                         *  # DO NOT REMOVE PYSIDE IMPORTS - Required for pyqtgraph to select correct version on some platforms)
-from PyQt5.QtCore import Qt
+from Qt.QtCore import Qt
 from chipwhisperer.common.ui.KeyScheduleDialog import AesKeyScheduleDialog, DesKeyScheduleDialog
 from chipwhisperer.common.api.CWCoreAPI import CWCoreAPI
 from chipwhisperer.analyzer.utils.TraceExplorerDialog import TraceExplorerDialog

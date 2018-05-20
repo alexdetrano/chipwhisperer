@@ -1,7 +1,7 @@
 import sys
 from unittest import TestCase
 from chipwhisperer.common.api.CWCoreAPI import CWCoreAPI
-from PyQt5.QtCore import *
+from Qt.QtCore import *
 
 class TestTraceManager(TestCase):
     def setUp(self):

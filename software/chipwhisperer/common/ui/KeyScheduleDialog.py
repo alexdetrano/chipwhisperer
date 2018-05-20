@@ -25,8 +25,8 @@
 #    along with chipwhisperer.  If not, see <http://www.gnu.org/licenses/>.
 #=================================================
 
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
+from Qt.QtGui import *
+from Qt.QtWidgets import *
 import chipwhisperer.common.utils.qt_tweaks as QtFixes
 from chipwhisperer.common.utils import util
 from chipwhisperer.analyzer.attacks.models.AES128_8bit import AES128_8bit

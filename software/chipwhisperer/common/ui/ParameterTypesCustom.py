@@ -30,7 +30,7 @@
 """
 
 import os
-from PyQt5.QtWidgets import *
+from Qt.QtWidgets import *
 
 import pyqtgraph as pg
 from pyqtgraph.Qt import QtCore, QtGui

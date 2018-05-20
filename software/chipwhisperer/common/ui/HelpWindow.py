@@ -6,11 +6,11 @@
 # This project is released under the Modified FreeBSD License. See LICENSE
 # file which should have came with this code.
 
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
-from PyQt5.QtCore import *
+from Qt.QtGui import *
+from Qt.QtWidgets import *
+from Qt.QtCore import *
 import chipwhisperer.common.utils.qt_tweaks as QtFixes
-from PyQt5 import QtWebKitWidgets
+from Qt import QtWebKitWidgets
 try:
     from docutils import core, io
 except ImportError:

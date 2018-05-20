@@ -32,9 +32,9 @@
 
 
 import sys
-from PyQt5.QtWidgets import *
-from PyQt5.QtCore import *
-from PyQt5.QtGui import *
+from Qt.QtWidgets import *
+from Qt.QtCore import *
+from Qt.QtGui import *
 import os.path
 os.environ["QT_API"] = "pyside"
 import matplotlib

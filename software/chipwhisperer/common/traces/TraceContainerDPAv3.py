@@ -22,14 +22,14 @@
 #    You should have received a copy of the GNU General Public License
 #    along with chipwhisperer.  If not, see <http://www.gnu.org/licenses/>.
 import logging
-from PyQt5.QtWidgets import *
+from Qt.QtWidgets import *
 
 __author__ = "Colin O'Flynn"
 
 import os.path
 import sys
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
+from Qt.QtGui import *
+from Qt.QtCore import *
 from chipwhisperer.common.utils import tracereader_dpacontestv3, tracereader_native
 import numpy as np
 from time import gmtime, strftime

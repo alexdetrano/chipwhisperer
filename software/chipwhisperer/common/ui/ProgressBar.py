@@ -23,7 +23,7 @@
 #    along with chipwhisperer.  If not, see <http://www.gnu.org/licenses/>.
 #=================================================
 import logging
-from PyQt5.QtWidgets import *
+from Qt.QtWidgets import *
 from datetime import *
 from ..utils import util
 
@@ -133,8 +133,8 @@ class ProgressBarText(object):
         self.printAll = value
 
 try:
-    from PyQt5.QtCore import *
-    from PyQt5.QtGui import *
+    from Qt.QtCore import *
+    from Qt.QtGui import *
     from ..utils import qt_tweaks
 
     class ProgressBarGUI(qt_tweaks.QDialog, ProgressBarText):

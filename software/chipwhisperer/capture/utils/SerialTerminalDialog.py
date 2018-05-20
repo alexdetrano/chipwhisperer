@@ -24,9 +24,9 @@
 #=================================================
 
 import sys
-from PyQt5.QtWidgets import *
-from PyQt5.QtCore import *
-from PyQt5.QtGui import *
+from Qt.QtWidgets import *
+from Qt.QtCore import *
+from Qt.QtGui import *
 import chipwhisperer.common.utils.qt_tweaks as QtFixes
 import logging
 
