@@ -25,13 +25,11 @@
 #=================================================
 
 import os.path
-from Qt.QtWidgets import *
 import time
 from datetime import datetime
 from Qt.QtCore import *
 from Qt.QtGui import *
-from Qt.QtGui import (QVBoxLayout, QHBoxLayout, QPushButton, QLabel,
-                         QPlainTextEdit, QFileDialog)
+from Qt.QtWidgets import QVBoxLayout, QHBoxLayout, QPushButton, QLabel, QPlainTextEdit, QFileDialog
 
 from chipwhisperer.common.ui.CWMainGUI import CWMainGUI
 from chipwhisperer.capture.api.programmers import AVRProgrammer, XMEGAProgrammer, STM32FProgrammer
