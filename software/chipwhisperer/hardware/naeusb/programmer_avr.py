@@ -143,7 +143,7 @@ class ATMega2564RFR2(AVRBase):
 supported_avr = [ATMega328P(), ATMega328(), ATMega168A(), ATMega168PA(), ATMega88A(), ATMega88PA(), ATMega48A(), ATMega48PA(), ATMega128RFA1(), ATMega2564RFR2()]
 
 def print_fun(s):
-    print s
+    print(s)
 
 class AVRISP(object):
 

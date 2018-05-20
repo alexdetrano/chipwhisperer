@@ -10,10 +10,10 @@ class HIDSPI(object):
     
     
     def findCWSPI(self, VID=0x03EB, PID=0xBAED):
-        print "Detecting HID device..."
+        print("Detecting HID device...")
         self.hdev = hid.device(VID, PID)        
-        print "Manufacturer: %s" % self.hdev.get_manufacturer_string()
-        print "Product: %s" % self.hdev.get_product_string()
+        print("Manufacturer: %s" % self.hdev.get_manufacturer_string())
+        print("Product: %s" % self.hdev.get_product_string())
 
     def sendHID(self, cmd, data=[]):        
         #Report is 64 bytes. -2 for our bytes
@@ -83,11 +83,11 @@ def main():
     
 
     for i,r in enumerate(rv):
-        print "%02x "%r,
+        print("%02x "%r, end=' ')
         if i == 15:
-            print ""
+            print("")
             
-    print ""
+    print("")
     
 
 if __name__ == '__main__':

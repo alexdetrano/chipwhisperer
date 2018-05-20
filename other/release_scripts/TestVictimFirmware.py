@@ -6,11 +6,11 @@ import subprocess, os
 
 def testRV(rv):
     if rv[0]:
-        print "[OK]"
+        print("[OK]")
     else:
-        print "[FAILED]"
-        print "stdout: %s"%rv[1][0]
-        print "stderr: %s"%rv[1][1]
+        print("[FAILED]")
+        print("stdout: %s"%rv[1][0])
+        print("stderr: %s"%rv[1][1])
         raise ValueError("Test Failed")
 
 class TestVictimFirmware(object):
@@ -24,16 +24,16 @@ class TestVictimFirmware(object):
         self.basePath = "../../hardware/victims/firmware/"
 
     def test(self):
-        print "--Victim Firmware Build Test--"
+        print("--Victim Firmware Build Test--")
         tests = 5
 
-        print "  avr-serial-nocrypto            ",
+        print("  avr-serial-nocrypto            ", end=' ')
         testRV(self.runMake('avr-serial-nocrypto', 'MCU=atmega328p'))
 
-        print "  avr-serial with crypto         ",
+        print("  avr-serial with crypto         ", end=' ')
         testRV(self.runMake('avr-serial', 'MCU=atmega328p'))
 
-        print "  xmega-serial with crypto       ",
+        print("  xmega-serial with crypto       ", end=' ')
         #todo: fix this script so don't need this bogus argument
         testRV(self.runMake('xmega-serial', 'IGNORETHIS=22'))
 

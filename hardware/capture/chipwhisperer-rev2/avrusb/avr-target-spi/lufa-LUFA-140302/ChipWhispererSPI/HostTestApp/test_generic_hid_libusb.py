@@ -12,7 +12,7 @@ def get_and_init_hid_device():
     device = usb.core.find(idVendor=device_vid, idProduct=device_pid)
 
     if device is None:
-        print "Failed to find USB Device"
+        print("Failed to find USB Device")
         sys.exit("Could not find USB device.")
         
 
@@ -43,7 +43,7 @@ def send_led_pattern(device, led1, led2, led3, led4):
     );
     assert number_of_bytes_written == len(report_data)
 
-    print("Sent LED Pattern: {0}".format(report_data))
+    print(("Sent LED Pattern: {0}".format(report_data)))
 
 def receive_led_pattern(hid_device):
     endpoint = hid_device[0][(0,0)][0]
@@ -53,10 +53,10 @@ def receive_led_pattern(hid_device):
 def main():    
     hid_device = get_and_init_hid_device()
 
-    print("Connected to device 0x%04X/0x%04X - %s [%s]" %
+    print(("Connected to device 0x%04X/0x%04X - %s [%s]" %
           (hid_device.idVendor, hid_device.idProduct,
            usb.util.get_string(hid_device, 256, hid_device.iProduct),
-           usb.util.get_string(hid_device, 256, hid_device.iManufacturer)))
+           usb.util.get_string(hid_device, 256, hid_device.iManufacturer))))
 
     p = 0
     #while (True):

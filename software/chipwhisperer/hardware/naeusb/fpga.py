@@ -170,7 +170,7 @@ class FPGA(object):
                 # t0 += Date().getTime()
             except IOError as e:
                 if tries > 1:
-                    print("Warning: " + str(e) + ": Retrying it ...")
+                    print(("Warning: " + str(e) + ": Retrying it ..."))
                 else:
                     raise
             tries -= 1

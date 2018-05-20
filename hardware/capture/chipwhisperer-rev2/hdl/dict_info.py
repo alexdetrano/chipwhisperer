@@ -6,5 +6,5 @@ data = pickle.load(open('s6lx25-glitchwidth.p'))
 
 for t in data['values']:
     for j in data['values'][t]:
-        print "%04x "%j[0],
-    print ""
+        print("%04x "%j[0], end=' ')
+    print("")

@@ -288,5 +288,5 @@ if __name__ == "__main__":
     test.addTrace(wave, None, None, None)
     test.addTrace(wave, None, None, None)
     test.addTrace(wave, None, None, None)
-    print test.numTraces()
-    print test.numPoints()
+    print(test.numTraces())
+    print(test.numPoints())

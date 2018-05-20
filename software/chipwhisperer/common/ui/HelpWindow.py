@@ -13,7 +13,7 @@ from PySide import QtWebKit
 try:
     from docutils import core, io
 except ImportError:
-    print "ERROR: Should install 'docutils' package, help functions not parsing text properly"
+    print("ERROR: Should install 'docutils' package, help functions not parsing text properly")
     core = None
 import sys
 

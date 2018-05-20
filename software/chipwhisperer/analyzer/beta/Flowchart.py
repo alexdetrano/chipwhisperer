@@ -351,7 +351,7 @@ class Flowchart(Node):
                         else:
                             result = node.process(display=False, **args)
                     except:
-                        print("Error processing node %s. Args are: %s" % (str(node), str(args)))
+                        print(("Error processing node %s. Args are: %s" % (str(node), str(args))))
                         raise
                     for out in outs:
                         #print "    Output:", out, out.name()
@@ -359,7 +359,7 @@ class Flowchart(Node):
                         try:
                             data[out] = result[out.name()]
                         except:
-                            print(out, out.name())
+                            print((out, out.name()))
                             raise
             elif c == 'd':   ## delete a terminal result (no longer needed; may be holding a lot of memory)
                 #print "===> delete", arg
@@ -547,8 +547,8 @@ class Flowchart(Node):
                 try:
                     self.connectTerminals(self._nodes[n1][t1], self._nodes[n2][t2])
                 except:
-                    print(self._nodes[n1].terminals)
-                    print(self._nodes[n2].terminals)
+                    print((self._nodes[n1].terminals))
+                    print((self._nodes[n2].terminals))
                     printExc("Error connecting terminals %s.%s - %s.%s:" % (n1, t1, n2, t2))
                     
                 
@@ -965,7 +965,7 @@ class FlowchartWidget(QtGui.QWidget):
     def selectionChanged(self):
         #print "FlowchartWidget.selectionChanged called."
         items = self._scene.selectedItems()
-        print "     scene.selectedItems: ", items
+        print("     scene.selectedItems: ", items)
         if len(items) == 0:
             data = None
         else:

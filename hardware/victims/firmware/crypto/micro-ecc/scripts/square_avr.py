@@ -3,13 +3,13 @@
 import sys
 
 if len(sys.argv) < 2:
-    print "Provide the integer size in bytes"
+    print("Provide the integer size in bytes")
     sys.exit(1)
 
 size = int(sys.argv[1])
 
 if size > 40:
-    print "This script doesn't work with integer size %s due to laziness" % (size)
+    print("This script doesn't work with integer size %s due to laziness" % (size))
     sys.exit(1)
 
 init_size = size - 20
@@ -27,7 +27,7 @@ def hi(i):
 
 def emit(line, *args):
     s = '"' + line + r' \n\t"'
-    print s % args
+    print(s % args)
 
 #### set up registers
 zero = "r25"
@@ -51,12 +51,12 @@ if init_size > 0:
         emit("st z+, r1")
     else:
         #### first one
-        print ""
+        print("")
         emit("ldi r23, 0")
         emit("mul %s, %s", lo(0), hi(0))
         emit("st z+, r0")
         emit("mov r22, r1")
-        print ""
+        print("")
 
         #### rest of initial block, with moving accumulator registers
         acc = [22, 23, 24]
@@ -68,7 +68,7 @@ if init_size > 0:
                 emit("adc r%s, r1", acc[1])
                 emit("adc r%s, %s", acc[2], zero)
             emit("st z+, r%s", acc[0])
-            print ""
+            print("")
             acc = acc[1:] + acc[:1]
         
         lo_r = range(2, 2 + h)
@@ -86,7 +86,7 @@ if init_size > 0:
                 emit("adc r%s, r1", acc[1])
                 emit("adc r%s, %s", acc[2], zero)
             emit("st z+, r%s", acc[0])
-            print ""
+            print("")
             acc = acc[1:] + acc[:1]
             
         # loaded all of the high end bytes; now need to start loading the rest of the low end
@@ -101,7 +101,7 @@ if init_size > 0:
                 emit("adc r%s, r1", acc[1])
                 emit("adc r%s, %s", acc[2], zero)
             emit("st z+, r%s", acc[0])
-            print ""
+            print("")
             acc = acc[1:] + acc[:1]
         
         lo_r = lo_r[1:] + lo_r[:1]
@@ -116,7 +116,7 @@ if init_size > 0:
                 emit("adc r%s, r1", acc[1])
                 emit("adc r%s, %s", acc[2], zero)
             emit("st z+, r%s", acc[0])
-            print ""
+            print("")
             acc = acc[1:] + acc[:1]
             lo_r = lo_r[1:] + lo_r[:1] # make the indexing easy
         
@@ -125,7 +125,7 @@ if init_size > 0:
         emit("adc r%s, r1", acc[1])
         emit("st z+, r%s", acc[0])
         emit("st z+, r%s", acc[1])
-    print ""
+    print("")
     emit("sbiw r26, %s", init_size) # reset x
     emit("sbiw r30, %s", size + init_size) # reset z
 
@@ -138,12 +138,12 @@ for i in xrange(s):
 
 #### first few columns
 # NOTE: this is only valid if size >= 3
-print ""
+print("")
 emit("ldi r23, 0")
 emit("mul r%s, r%s", rg(0), rg(0))
 emit("st z+, r0")
 emit("mov r22, r1")
-print ""
+print("")
 emit("ldi r24, 0")
 emit("mul r%s, r%s", rg(0), rg(1))
 emit("add r22, r0")
@@ -153,7 +153,7 @@ emit("add r22, r0")
 emit("adc r23, r1")
 emit("adc r24, %s", zero)
 emit("st z+, r22")
-print ""
+print("")
 emit("ldi r22, 0")
 emit("mul r%s, r%s", rg(0), rg(2))
 emit("add r23, r0")
@@ -167,7 +167,7 @@ emit("add r23, r0")
 emit("adc r24, r1")
 emit("adc r22, %s", zero)
 emit("st z+, r23")
-print ""
+print("")
 
 acc = [23, 24, 22]
 old_acc = [28, 29]
@@ -205,7 +205,7 @@ for i in xrange(3, s):
     
     # store
     emit("st z+, r%s", acc[0])
-    print ""
+    print("")
 
 regs = range(2, 22)
 for i in xrange(init_size):
@@ -252,7 +252,7 @@ for i in xrange(init_size):
     
         # store
         emit("st z+, r%s", acc[0])
-        print ""
+        print("")
 
 for i in xrange(1, s-3):
     emit("ldi r%s, 0", old_acc[1])
@@ -288,7 +288,7 @@ for i in xrange(1, s-3):
 
     # store
     emit("st z+, r%s", acc[0])
-    print ""
+    print("")
 
 acc = acc[1:] + acc[:1]
 emit("ldi r%s, 0", acc[2])
@@ -304,7 +304,7 @@ emit("add r%s, r0", acc[0])
 emit("adc r%s, r1", acc[1])
 emit("adc r%s, %s", acc[2], zero)
 emit("st z+, r%s", acc[0])
-print ""
+print("")
 
 acc = acc[1:] + acc[:1]
 emit("ldi r%s, 0", acc[2])
@@ -316,7 +316,7 @@ emit("add r%s, r0", acc[0])
 emit("adc r%s, r1", acc[1])
 emit("adc r%s, %s", acc[2], zero)
 emit("st z+, r%s", acc[0])
-print ""
+print("")
 
 emit("mul r%s, r%s", regs[19], regs[19])
 emit("add r%s, r0", acc[1])

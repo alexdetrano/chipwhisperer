@@ -177,7 +177,7 @@ class CW305(TargetTemplate):
             if bsfile is None:
                 bsfile = self.params.getChild(['FPGA Bitstream',"fpgabsfile"]).getValue()
             if not os.path.isfile(bsfile):
-                print("FPGA Bitstream not configured or '%s' not a file." % str(bsfile))
+                print(("FPGA Bitstream not configured or '%s' not a file." % str(bsfile)))
             else:
                 from datetime import datetime
                 starttime = datetime.now()

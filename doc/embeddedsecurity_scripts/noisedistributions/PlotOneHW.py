@@ -86,17 +86,17 @@ def PlotOneHW(hwlist, plotHist=True, plotNorms=True, plotMeans=True, plotSDs=Tru
         means[i] = param[0]
         sds[i] = param[1]
     
-        print "mean = %f, sd=%f"%(param[0], param[1])
+        print("mean = %f, sd=%f"%(param[0], param[1]))
     
         xlims[0] = min(xlims[0], -5*param[1]+param[0])
         xlims[1] = max(xlims[1], 5*param[1]+param[0])
 
-        print "%3.3f "%param[0], 
+        print("%3.3f "%param[0], end=' ') 
    
     mmean = np.mean(means)
     msd = np.mean(sds)
 
-    print " mean/sd = %f"%(abs(mmean/msd))
+    print(" mean/sd = %f"%(abs(mmean/msd)))
     #print "mmean^2 / sd^2 = %f"%((mmean**2) / (msd**2))
     #hatEsNO = (mmean**2) / (2*(msd**2))
     #print "SNR = %f dB"%(math.log10(hatEsNO)*10)
@@ -234,21 +234,21 @@ def PlotOneHW(hwlist, plotHist=True, plotNorms=True, plotMeans=True, plotSDs=Tru
     show()
 
 def printUsage():
-    print ""
-    print ""
-    print "Plotting of Noise Distributions"
-    print "  by Colin O'Flynn"
-    print ""
-    print "Usage information: ./%s hwlistfile.npy bnum <options>"%sys.argv[0]
-    print "  Options can either be nothing, or specify which plots to enable"
-    print "  by list of 'True' or 'False' for each option. Available plots:"
-    print "    1. Histogram of all hamming weights"
-    print "    2. All gaussian-fitted results in one plot"
-    print "    3. Mean vs Hamming Weight"
-    print "    4. Std-Dev vs Hamming Weight"
-    print "    5. Auto-Correlation of each Hamming Weight"
-    print " e.g. to plot only gaussian fitting results:"
-    print "   ./%s hwlistfile.npy False True False False False"%sys.argv[0]
+    print("")
+    print("")
+    print("Plotting of Noise Distributions")
+    print("  by Colin O'Flynn")
+    print("")
+    print("Usage information: ./%s hwlistfile.npy bnum <options>"%sys.argv[0])
+    print("  Options can either be nothing, or specify which plots to enable")
+    print("  by list of 'True' or 'False' for each option. Available plots:")
+    print("    1. Histogram of all hamming weights")
+    print("    2. All gaussian-fitted results in one plot")
+    print("    3. Mean vs Hamming Weight")
+    print("    4. Std-Dev vs Hamming Weight")
+    print("    5. Auto-Correlation of each Hamming Weight")
+    print(" e.g. to plot only gaussian fitting results:")
+    print("   ./%s hwlistfile.npy False True False False False"%sys.argv[0])
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
@@ -275,7 +275,7 @@ if __name__ == "__main__":
         #PlotOneHW(hwlist, plotHist=True, plotNorms=False, plotMeans=False, plotSDs=False, plotAutoCorr=False)
     	
         for bnum in range(0,16):
-            print "%3d "%bnum,
+            print("%3d "%bnum, end=' ')
             hwlist = np.load("aes256rsm-vcc-csi-hwlist/hwlist_bnum=%d.npy"%bnum)
             PlotOneHW(hwlist, False, False, False, False, False)
            

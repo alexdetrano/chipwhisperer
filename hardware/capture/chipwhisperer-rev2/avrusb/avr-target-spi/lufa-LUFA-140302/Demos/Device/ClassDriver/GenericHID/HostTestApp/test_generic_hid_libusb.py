@@ -60,7 +60,7 @@ def send_led_pattern(device, led1, led2, led3, led4):
     );
     assert number_of_bytes_written == len(report_data)
 
-    print("Sent LED Pattern: {0}".format(report_data))
+    print(("Sent LED Pattern: {0}".format(report_data)))
 
 def receive_led_pattern(hid_device):
     endpoint = hid_device[0][(0,0)][0]
@@ -70,10 +70,10 @@ def receive_led_pattern(hid_device):
 def main():
     hid_device = get_and_init_hid_device()
 
-    print("Connected to device 0x%04X/0x%04X - %s [%s]" %
+    print(("Connected to device 0x%04X/0x%04X - %s [%s]" %
           (hid_device.idVendor, hid_device.idProduct,
            usb.util.get_string(hid_device, 256, hid_device.iProduct),
-           usb.util.get_string(hid_device, 256, hid_device.iManufacturer)))
+           usb.util.get_string(hid_device, 256, hid_device.iManufacturer))))
 
     p = 0
     while (True):
@@ -86,7 +86,7 @@ def main():
 
         # Receive and print the current LED pattern
         led_pattern = receive_led_pattern(hid_device)[0:4]
-        print("Received LED Pattern: {0}".format(led_pattern))
+        print(("Received LED Pattern: {0}".format(led_pattern)))
 
         # Compute next LED pattern in sequence
         p = (p + 1) % 16

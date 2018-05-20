@@ -82,7 +82,7 @@ supported_stm32f = [STM32F071(), STM32F10xxx_LD(), STM32F10xxx_MD(), STM32F10xxx
                     STM32F10xxx_HDV(), STM32F2(), STM32F303cBC(), STM32F40xxx()]
 
 def print_fun(s):
-    print s
+    print(s)
 
 class CmdException(Exception):
     pass
@@ -450,7 +450,7 @@ class STM32FSerial(object):
             self.sp.write(chr(0x00))
             tmp = self.sp.timeout
             self.sp.timeout = 30000
-            print "Extended erase (0x44), this can take ten seconds or more"
+            print("Extended erase (0x44), this can take ten seconds or more")
             self._wait_for_ask("0x44 erasing failed")
             self.sp.timeout = tmp
             logging.info("    Extended Erase memory done")

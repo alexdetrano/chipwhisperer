@@ -30,4 +30,4 @@ class GlitchResultsDisplay(object):
 
     def display_table(self):
         table = AsciiTable(self.data)
-        print(table.table)
+        print((table.table))

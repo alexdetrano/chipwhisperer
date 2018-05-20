@@ -28,14 +28,14 @@ try:
     from PySide.QtCore import *
     from PySide.QtGui import *
 except ImportError:
-    print "ERROR: PySide is required for this program"
+    print("ERROR: PySide is required for this program")
     sys.exit()
     
 try:
     import pyqtgraph as pg
     from pyqtgraph.flowchart import Flowchart
 except ImportError:
-    print "ERROR: PyQtGraph is required for this program"
+    print("ERROR: PyQtGraph is required for this program")
     sys.exit()
 
 class FlowChartWidget(QWidget):

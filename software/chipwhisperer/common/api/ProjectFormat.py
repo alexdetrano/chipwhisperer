@@ -37,7 +37,7 @@ from chipwhisperer.common.traces.TraceContainerNative import TraceContainerNativ
 try:
     from configobj import ConfigObj  # import the module
 except ImportError:
-    print "ERROR: configobj (https://pypi.python.org/pypi/configobj/) is required for this program"
+    print("ERROR: configobj (https://pypi.python.org/pypi/configobj/) is required for this program")
     sys.exit()
 
 __author__ = "Colin O'Flynn"

@@ -100,7 +100,7 @@ class ReaderChipWhispererUSI(ReaderTemplate):
         p = temprx
 
         if p[0] != ins:
-            print("ACK Error: %x != %x"%(ins, p[0]))
+            print(("ACK Error: %x != %x"%(ins, p[0])))
 
         #for t in p:
         #    print "%x "%t,

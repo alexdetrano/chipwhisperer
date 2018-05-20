@@ -377,7 +377,7 @@ class Parameter(object):
             if echo and not self.opts.get("echooff", False) and not self.readonly() and Parameter.scriptingOutput and Parameter.usePyQtGraph:
                 path = self.getPath()
                 if path is not None:
-                    print >> Parameter.scriptingOutput, str(path + [value]) + ","
+                    print(str(path + [value]) + ",", file=Parameter.scriptingOutput)
 
     def callLinked(self):
         for name in self.opts.get("linked", []):
@@ -392,7 +392,7 @@ class Parameter(object):
             if Parameter.scriptingOutput and Parameter.usePyQtGraph:
                 path = self.getPath()
                 if path is not None:
-                    print >> Parameter.scriptingOutput, (str(path + [None]) + ",")
+                    print((str(path + [None]) + ","), file=Parameter.scriptingOutput)
         self.callLinked()
 
     def setDefault(self, default):
@@ -777,7 +777,7 @@ if __name__ == '__main__':
             self.params = Parameter(name='Sub-module %d' % d, type='group', children=moreparams)
 
         def action(self, e):
-            print "action %s" % e.getValue()
+            print("action %s" % e.getValue())
 
         def getLinked(self):
             return 1.0 / float(self.params.getChild('Value').getValue())
@@ -845,14 +845,14 @@ if __name__ == '__main__':
             self.params.load("abcde.txt")
 
         def printhelp(self, msg, obj):
-            print msg
+            print(msg)
 
         def getmodule(self):
             return self.module
 
         @setupSetParam("Module")
         def setmodule(self, module):
-            print "Changing Module"
+            print("Changing Module")
             self.module = module
 
         def getLinked(self):

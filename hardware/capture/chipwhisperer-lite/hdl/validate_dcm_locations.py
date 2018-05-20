@@ -28,7 +28,7 @@ def decodeFARMIN(data, indx):
     bram = (0xC000 & d) >> 14
     minor = (0x03FF & d)
 
-    print "%04x: FAR_MIN Data: BRAM %d, Minor %d"%(d, bram, minor)
+    print("%04x: FAR_MIN Data: BRAM %d, Minor %d"%(d, bram, minor))
 
     fpga_addr['bram'] = bram
     fpga_addr['bram_minor'] = minor
@@ -47,7 +47,7 @@ def decodeFARMAJ(data, indx):
     row = (d & 0x0f00) >> 8
     major = (d & 0x0ff)
 
-    print "%04x: FAR_MAJ Data: Block %d, Row %d, Major %d"%(d, block, row, major)
+    print("%04x: FAR_MAJ Data: Block %d, Row %d, Major %d"%(d, block, row, major))
     indx += 1
 
     fpga_addr['major'] = major
@@ -191,14 +191,14 @@ def get_addresses(data):
 		d = data[1][i]
 
 	    if dmy > 0:
-		print "FFFF: Dummy (x %d)"%dmy
+		print("FFFF: Dummy (x %d)"%dmy)
 		inc = False
 	    elif nop > 0:
-		print "2000: Nop (x %d)"%nop
+		print("2000: Nop (x %d)"%nop)
 		inc = False
 	    elif null > 0:
 		d = 0x0000
-		print "0000: Null (x %d)"%null
+		print("0000: Null (x %d)"%null)
 		inc = False
 
 	    elif ((d & 0xE000) == 0x2000) & synced:
@@ -217,7 +217,7 @@ def get_addresses(data):
 
 		num = d & 0x001F
 		s += " %d words"%num
-		print "%04x: %s"%(d, s)
+		print("%04x: %s"%(d, s))
 
 		if regstr[addr][1] is None:
 		    i += 1
@@ -225,7 +225,7 @@ def get_addresses(data):
 		        d = data[1][i]
 		        num -= 1
 		        s = "DATA"
-		        print "%04x: %s"%(d, s)
+		        print("%04x: %s"%(d, s))
 		        i += 1
 		else:
 		    i = regstr[addr][1](data[1], i)
@@ -244,22 +244,22 @@ def get_addresses(data):
 		    s += "%s"%regstr[addr][0]
 		except IndexError:
 		    s += "0x%02x"%addr
-		print "%04x: %s"%(d, s)
+		print("%04x: %s"%(d, s))
 
 		i += 1
-		print "%04x"%data[1][i]
+		print("%04x"%data[1][i])
 		
 		wordcnt = (data[1][i] << 16) | data[1][i+1]
-		print "%04x: %d frames"%(data[1][i+1], wordcnt)
+		print("%04x: %d frames"%(data[1][i+1], wordcnt))
 		i += 2
 
 		for q in range(0, wordcnt):
 		    if showData:
-		        print "%04x :CFG DATA"%data[1][i]
+		        print("%04x :CFG DATA"%data[1][i])
 		    i += 1
 
 		if showData is False:
-		    print "...Data Frames Not Printed..."
+		    print("...Data Frames Not Printed...")
 
 		inc = False
 
@@ -275,7 +275,7 @@ def get_addresses(data):
 	    #Generic Printing of normal cases
 	    if inc:
 		i += 1
-		print "%04x: %s"%(d, s)
+		print("%04x: %s"%(d, s))
 
 	    if i == len(data[1]):
 		run = False
@@ -295,26 +295,26 @@ p = parseRbt()
 get_addresses(p)
 fpga_addr2  = fpga_addr.copy()
 
-print "*****************************************************************"
-print "*****************************************************************"
-print "*****************************************************************"
-print "*****************************************************************"
-print ""
-print ""
+print("*****************************************************************")
+print("*****************************************************************")
+print("*****************************************************************")
+print("*****************************************************************")
+print("")
+print("")
 
 if fpga_addr1 != fpga_addr2:
-    print "DCMs LOC'd to invalid locations, PR will fail."
-    print fpga_addr1
-    print fpga_addr2
-    print ""
-    print ""
+    print("DCMs LOC'd to invalid locations, PR will fail.")
+    print(fpga_addr1)
+    print(fpga_addr2)
+    print("")
+    print("")
     sys.exit(-1)
 
 else:
-    print "DCMs LOC'd to compatable locations, OK to continue"
+    print("DCMs LOC'd to compatable locations, OK to continue")
 
-print ""
-print ""
+print("")
+print("")
     
 
 

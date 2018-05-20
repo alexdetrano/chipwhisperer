@@ -15,7 +15,7 @@ for width in range(0, 128):
 
     if dbase:
         if d['base'] != dbase['base']:
-            print "Uh no"
+            print("Uh no")
 
         dbase['values'].update(d['values'])
     else:

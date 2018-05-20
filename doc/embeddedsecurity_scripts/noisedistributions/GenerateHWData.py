@@ -62,7 +62,7 @@ def main(tracedir, bnum, ptlist):
             preflist.append(f)
 
     if len(preflist) == 0:
-        print "WARNING: No traces found. Check directory."
+        print("WARNING: No traces found. Check directory.")
 
     hwlist = [[]]*9
     for i in range(0,9):
@@ -70,7 +70,7 @@ def main(tracedir, bnum, ptlist):
 
     for indx,pref in enumerate(preflist):
         myFunc(tracedir, pref, hwlist, bnum, ptlist)
-        print "File %d/%d"%(indx, len(preflist))
+        print("File %d/%d"%(indx, len(preflist)))
 
     sio.savemat("hwlist_bnum=%d.mat"%bnum, {'hwlist':hwlist, 'bnum':bnum})
     np.save("hwlist_bnum=%d"%bnum, hwlist)

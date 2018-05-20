@@ -8,7 +8,7 @@ def decodeFARMIN(data, indx):
     bram = (0xC000 & d) >> 14
     minor = (0x03FF & d)
 
-    print "%04x: BRAM %d, Minor %d"%(d, bram, minor)
+    print("%04x: BRAM %d, Minor %d"%(d, bram, minor))
 
     indx += 1
 
@@ -24,7 +24,7 @@ def decodeFARMAJ(data, indx):
     row = (d & 0x0f00) >> 8
     major = (d & 0x0ff)
 
-    print "%04x: Block %d, Row %d, Major %d"%(d, block, row, major)
+    print("%04x: Block %d, Row %d, Major %d"%(d, block, row, major))
     indx += 1
 
     if writelen == 2:
@@ -121,14 +121,14 @@ while run:
         d = data[1][i]
 
     if dmy > 0:
-        print "FFFF: Dummy (x %d)"%dmy
+        print("FFFF: Dummy (x %d)"%dmy)
         inc = False
     elif nop > 0:
-        print "2000: Nop (x %d)"%nop
+        print("2000: Nop (x %d)"%nop)
         inc = False
     elif null > 0:
         d = 0x0000
-        print "0000: Null (x %d)"%null
+        print("0000: Null (x %d)"%null)
         inc = False
 
     elif ((d & 0xE000) == 0x2000) & synced:
@@ -147,7 +147,7 @@ while run:
 
         num = d & 0x001F
         s += " %d words"%num
-        print "%04x: %s"%(d, s)
+        print("%04x: %s"%(d, s))
 
         if regstr[addr][1] is None:
             i += 1
@@ -155,7 +155,7 @@ while run:
                 d = data[1][i]
                 num -= 1
                 s = "DATA"
-                print "%04x: %s"%(d, s)
+                print("%04x: %s"%(d, s))
                 i += 1
         else:
             i = regstr[addr][1](data[1], i)
@@ -174,13 +174,13 @@ while run:
             s += "%s"%regstr[addr][0]
         except IndexError:
             s += "0x%02x"%addr
-        print "%04x: %s"%(d, s)
+        print("%04x: %s"%(d, s))
 
         i += 1
-        print "%04x"%data[1][i]
+        print("%04x"%data[1][i])
         
         wordcnt = (data[1][i] << 16) | data[1][i+1]
-        print "%04x: %d frames"%(data[1][i+1], wordcnt)
+        print("%04x: %d frames"%(data[1][i+1], wordcnt))
         i += 2
 
         for q in range(0, wordcnt):
@@ -202,7 +202,7 @@ while run:
     #Generic Printing of normal cases
     if inc:
         i += 1
-        print "%04x: %s"%(d, s)
+        print("%04x: %s"%(d, s))
 
     if i == len(data[1]):
         run = False

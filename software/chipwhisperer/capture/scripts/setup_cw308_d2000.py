@@ -11,9 +11,9 @@ try:
 except NameError:
     pass
 
-print "***********************************************"
-print "1. Ensure J3 on UFO Board routines CLKFB to HS1/IN"
-print "2. Confirm baud settings"
+print("***********************************************")
+print("1. Ensure J3 on UFO Board routines CLKFB to HS1/IN")
+print("2. Confirm baud settings")
     
 scope.gain.gain = 45
 scope.adc.samples = 25000
@@ -35,8 +35,9 @@ ext_freq = scope.clock.freq_ctr
 if ext_freq > 10:
 
     baud = (115200 / 32E6) * ext_freq
-    print "Based on extclk of %d Hz, setting baud to %d" % (ext_freq, baud)
+    print("Based on extclk of %d Hz, setting baud to %d" % (ext_freq, baud))
     target.baud = baud
     
 else:
-    raise IOError("Did not detect external clock from D2000. Confirm jumpers and rerun, or increase delay before sample."
+    raise IOError("Did not detect external clock from D2000. Confirm jumpers and rerun, or increase delay before sample.")
+

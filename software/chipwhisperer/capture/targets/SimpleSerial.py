@@ -634,8 +634,8 @@ class SimpleSerial(TargetTemplate, util.DisableNewAttr):
         #Is a beginning part
         if len(expected[0]) > 0:
             if response[0:len(expected[0])] != expected[0]:
-                print("Sync Error: %s"%response)
-                print("Hex Version: %s" % (" ".join(["%02x" % ord(t) for t in response])))
+                print(("Sync Error: %s"%response))
+                print(("Hex Version: %s" % (" ".join(["%02x" % ord(t) for t in response]))))
 
                 return None
 
@@ -652,7 +652,7 @@ class SimpleSerial(TargetTemplate, util.DisableNewAttr):
         #Is end part?
         if len(expected[1]) > 0:
             if response[startindx:startindx+len(expected[1])] != expected[1]:
-                print("Sync Error: %s"%response)
+                print(("Sync Error: %s"%response))
                 return None
 
         return data

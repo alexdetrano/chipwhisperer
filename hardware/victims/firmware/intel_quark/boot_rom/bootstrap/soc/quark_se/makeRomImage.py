@@ -57,7 +57,7 @@ offset += romCodeLen
 imageFile.close()
 
 print('. . . . . . . . . . . . . . . . . . . . . . . . . . . .')
-print('Image size = ' + hex(imageLen))
-print('Data area size = ' + hex(dataAreaLen))
-print('ROM code size = ' + hex(romCodeLen))
+print(('Image size = ' + hex(imageLen)))
+print(('Data area size = ' + hex(dataAreaLen)))
+print(('ROM code size = ' + hex(romCodeLen)))
 print('. . . . . . . . . . . . . . . . . . . . . . . . . . . .')

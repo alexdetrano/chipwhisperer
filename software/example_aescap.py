@@ -58,4 +58,4 @@ scope.triggermux.triggers = "tio4"
 gui.capture()
 
 
-print scope.trigger.offset
+print(scope.trigger.offset)

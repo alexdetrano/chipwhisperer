@@ -321,10 +321,10 @@ class Command:
 if __name__ == '__main__':
     class test(object):
         def m(self):
-            print "here"
+            print("here")
 
         def __del__(self):
-            print "deleted"
+            print("deleted")
 
     x = test()
     y = x.m

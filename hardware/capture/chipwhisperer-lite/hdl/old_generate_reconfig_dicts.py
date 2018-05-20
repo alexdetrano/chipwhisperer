@@ -28,7 +28,7 @@ blockrng = (0, 32)
 #blockrng = (96, 128)
 
 for width in range(blockrng[0], blockrng[1]):
-    print "Starting %d"%width
+    print("Starting %d"%width)
     curdir = r'autogen_dir/width%d'%width
     os.makedirs(curdir)
     shutil.copyfile("cwlite_ise/cwlite_interface.ncd", "%s/cwlite_interface.ncd"%curdir)

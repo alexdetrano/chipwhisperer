@@ -43,7 +43,7 @@ def main(directory):
             preflist.append(f)
 
     if len(preflist) == 0:
-        print "WARNING: No traces found. Check directory."
+        print("WARNING: No traces found. Check directory.")
 
     prefix = preflist[0]
 
@@ -62,14 +62,14 @@ def main(directory):
   
     ntraces = 5000
 
-    print "traces = %d"%ntraces
-    print "points = %d"%npoints
+    print("traces = %d"%ntraces)
+    print("points = %d"%npoints)
 
     calcRxx = False
     calcRInv = False
 
     if calcRxx:
-        print "Calculating Rxx..."
+        print("Calculating Rxx...")
         
         #Estimate the covariance matrix Rxx. The following will work:
         Rxx = np.zeros( (npoints, npoints ) )
@@ -87,7 +87,7 @@ def main(directory):
             Rxx = np.load("Rxx.npy")
 
     if calcRInv:
-        print "Starting Inverse"
+        print("Starting Inverse")
         #May need pinv if inv not stable
         #invRxx = np.linalg.pinv(Rxx)
         invRxx = np.linalg.inv(Rxx)       
@@ -97,9 +97,9 @@ def main(directory):
 
     hinfo = np.zeros( (16, npoints) )
 
-    print "Generating equalization matrix..."
+    print("Generating equalization matrix...")
     for bnum in range(0,16):
-        print "Byte %d"%bnum
+        print("Byte %d"%bnum)
         hinfo[bnum] = myFunc(invRxx, traces, textin, key, bnum, ntraces, npoints)
 
     np.save("equalization", hinfo)

@@ -3,13 +3,13 @@
 import sys
 
 if len(sys.argv) < 2:
-    print "Provide the integer size in 32-bit words"
+    print("Provide the integer size in 32-bit words")
     sys.exit(1)
 
 size = int(sys.argv[1])
 
 if size > 6 and size != 8:
-    print "This script doesn't work with integer size %s due to laziness" % (size)
+    print("This script doesn't work with integer size %s due to laziness" % (size))
     sys.exit(1)
 
 init_size = 0
@@ -18,7 +18,7 @@ if size > 6:
 
 def emit(line, *args):
     s = '"' + line + r' \n\t"'
-    print s % args
+    print(s % args)
 
 def mulacc(acc, r1, r2):
     if size <= 6:
@@ -44,34 +44,34 @@ if init_size > 0:
     emit("ldmia r1!, {r5, r6}")
     
     emit("add r0, %s", (size - init_size) * 4)
-    print ""
+    print("")
 
     emit("umull r8, r9, r2, r5")
     emit("stmia r0!, {r8}")
-    print ""
+    print("")
     
     emit("umull r12, r10, r2, r6")
     emit("adds r9, r12")
     emit("adc r10, #0")
     emit("stmia r0!, {r9}")
-    print ""
+    print("")
     
     emit("umull r8, r9, r3, r6")
     emit("adds r10, r8")
     emit("adc r11, r9, #0")
     emit("stmia r0!, {r10, r11}")
-    print ""
+    print("")
     
     emit("sub r0, %s", (size + init_size) * 4)
     emit("sub r1, %s", (size) * 4)
 
 # load input words
 emit("ldmia r1!, {%s}", ",".join(["r%s" % (r[i]) for i in xrange(s)]))
-print ""
+print("")
 
 emit("umull r11, r12, r2, r2")
 emit("stmia r0!, {r11}")
-print ""
+print("")
 emit("mov r9, #0")
 emit("umull r10, r11, r2, r3")
 emit("adds r12, r10")
@@ -81,7 +81,7 @@ emit("adds r12, r10")
 emit("adcs r8, r11")
 emit("adc r9, #0")
 emit("stmia r0!, {r12}")
-print ""
+print("")
 emit("mov r10, #0")
 emit("umull r11, r12, r2, r4")
 emit("adds r11, r11")
@@ -95,7 +95,7 @@ emit("adds r8, r11")
 emit("adcs r9, r12")
 emit("adc r10, #0")
 emit("stmia r0!, {r8}")
-print ""
+print("")
 
 acc = [8, 9, 10]
 old_acc = [11, 12]
@@ -125,7 +125,7 @@ for i in xrange(3, s):
     
     # store
     emit("stmia r0!, {r%s}", acc[0])
-    print ""
+    print("")
 
 regs = list(r)
 for i in xrange(init_size):
@@ -164,7 +164,7 @@ for i in xrange(init_size):
     
         # store
         emit("stmia r0!, {r%s}", acc[0])
-        print ""
+        print("")
 
 for i in xrange(1, s-3):
     emit("mov r%s, #0", old_acc[1])
@@ -193,7 +193,7 @@ for i in xrange(1, s-3):
 
     # store
     emit("stmia r0!, {r%s}", acc[0])
-    print ""
+    print("")
 
 acc = acc[1:] + acc[:1]
 emit("mov r%s, #0", acc[2])
@@ -209,7 +209,7 @@ emit("adds r%s, r1", acc[0])
 emit("adcs r%s, r%s", acc[1], old_acc[1])
 emit("adc r%s, #0", acc[2])
 emit("stmia r0!, {r%s}", acc[0])
-print ""
+print("")
 
 acc = acc[1:] + acc[:1]
 emit("mov r%s, #0", acc[2])
@@ -221,7 +221,7 @@ emit("adds r%s, r1", acc[0])
 emit("adcs r%s, r%s", acc[1], old_acc[1])
 emit("adc r%s, #0", acc[2])
 emit("stmia r0!, {r%s}", acc[0])
-print ""
+print("")
 
 acc = acc[1:] + acc[:1]
 emit("umull r1, r%s, r%s, r%s", old_acc[1], regs[s - 1], regs[s - 1])

@@ -90,7 +90,7 @@ class XMEGA128D4(object):
 supported_xmega = [XMEGA128A4U(), XMEGA128D4(), XMEGA16A4()]
 
 def print_fun(s):
-    print s
+    print(s)
 
 class XMEGAPDI(object):
     """

@@ -2253,10 +2253,10 @@ if __name__ == "__main__":
     try:
         ser.open()
     except serial.SerialException as e:
-        print "Could not open %s" % ser.name
+        print("Could not open %s" % ser.name)
         sys.exit()
     except ValueError as s:
-        print "Invalid settings for serial port"
+        print("Invalid settings for serial port")
         ser.close()
         ser = None
         sys.exit()

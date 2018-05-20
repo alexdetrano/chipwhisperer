@@ -49,11 +49,11 @@ def send_led_pattern(device, led1, led2, led3, led4):
     # Send the generated report to the device
     device.send_output_report(report_data)
 
-    print("Sent LED Pattern: {0}".format(report_data[1:5]))
+    print(("Sent LED Pattern: {0}".format(report_data[1:5])))
 
 
 def received_led_pattern(report_data):
-    print("Received LED Pattern: {0}".format(report_data[1:5]))
+    print(("Received LED Pattern: {0}".format(report_data[1:5])))
 
 
 def main():
@@ -66,9 +66,9 @@ def main():
     try:
         hid_device.open()
 
-        print("Connected to device 0x%04X/0x%04X - %s [%s]" %
+        print(("Connected to device 0x%04X/0x%04X - %s [%s]" %
               (hid_device.vendor_id, hid_device.product_id,
-               hid_device.product_name, hid_device.vendor_name))
+               hid_device.product_name, hid_device.vendor_name)))
 
         # Set up the HID input report handler to receive reports
         hid_device.set_raw_data_handler(received_led_pattern)

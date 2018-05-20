@@ -7,4 +7,4 @@
 # The string being encrypted
 input_str = "Don't forget to buy milk!"
 
-print "p{}\\n".format(input_str.encode('rot13').encode('hex'))
+print("p{}\\n".format(input_str.encode('rot13').encode('hex')))

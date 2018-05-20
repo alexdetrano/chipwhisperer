@@ -3,7 +3,7 @@
 import sys
 
 if len(sys.argv) < 2:
-    print "Provide the integer size in 32-bit words"
+    print("Provide the integer size in 32-bit words")
     sys.exit(1)
 
 size = int(sys.argv[1])
@@ -17,7 +17,7 @@ if init_size == 0:
 
 def emit(line, *args):
     s = '"' + line + r' \n\t"'
-    print s % args
+    print(s % args)
 
 rx = [3, 4, 5]
 ry = [6, 7, 8]
@@ -29,7 +29,7 @@ emit("add r2, %s", (size - init_size) * 4) # move y
 emit("ldmia r1!, {%s}", ",".join(["r%s" % (rx[i]) for i in xrange(init_size)]))
 emit("ldmia r2!, {%s}", ",".join(["r%s" % (ry[i]) for i in xrange(init_size)]))
 
-print ""
+print("")
 if init_size == 1:
     emit("umull r9, r10, r3, r6")
     emit("stmia r0!, {r9, r10}")
@@ -37,7 +37,7 @@ else:
     #### first two multiplications of initial block
     emit("umull r11, r12, r3, r6")
     emit("stmia r0!, {r11}")
-    print ""
+    print("")
     emit("mov r10, #0")
     emit("umull r11, r9, r3, r7")
     emit("adds r12, r11")
@@ -47,7 +47,7 @@ else:
     emit("adcs r9, r14")
     emit("adc r10, #0")
     emit("stmia r0!, {r12}")
-    print ""
+    print("")
 
     #### rest of initial block, with moving accumulator registers
     acc = [9, 10, 11, 12, 14]
@@ -59,7 +59,7 @@ else:
             emit("adcs r%s, r%s", acc[1], acc[4])
             emit("adc r%s, #0", acc[2])
         emit("stmia r0!, {r%s}", acc[0])
-        print ""
+        print("")
         acc = acc[1:] + acc[:1]
 
         emit("mov r%s, #0", acc[2])
@@ -69,7 +69,7 @@ else:
             emit("adcs r%s, r%s", acc[1], acc[4])
             emit("adc r%s, #0", acc[2])
         emit("stmia r0!, {r%s}", acc[0])
-        print ""
+        print("")
         acc = acc[1:] + acc[:1]
     
     emit("umull r%s, r%s, r%s, r%s", acc[3], acc[4], rx[init_size-1], ry[init_size-1])
@@ -77,7 +77,7 @@ else:
     emit("adc r%s, r%s", acc[1], acc[4])
     emit("stmia r0!, {r%s}", acc[0])
     emit("stmia r0!, {r%s}", acc[1])
-print ""
+print("")
 
 #### reset y and z pointers
 emit("sub r0, %s", (2 * init_size + 3) * 4)
@@ -89,13 +89,13 @@ emit("ldmia r2!, {%s}", ",".join(["r%s" % (ry[i]) for i in xrange(3)]))
 #### load additional x registers
 if init_size != 3:
     emit("ldmia r1!, {%s}", ",".join(["r%s" % (rx[i]) for i in xrange(init_size, 3)]))
-print ""
+print("")
 
 prev_size = init_size
 for row in xrange(full_rows):
     emit("umull r11, r12, r3, r6")
     emit("stmia r0!, {r11}")
-    print ""
+    print("")
     emit("mov r10, #0")
     emit("umull r11, r9, r3, r7")
     emit("adds r12, r11")
@@ -105,7 +105,7 @@ for row in xrange(full_rows):
     emit("adcs r9, r14")
     emit("adc r10, #0")
     emit("stmia r0!, {r12}")
-    print ""
+    print("")
 
     acc = [9, 10, 11, 12, 14]
     emit("mov r%s, #0", acc[2])
@@ -115,7 +115,7 @@ for row in xrange(full_rows):
         emit("adcs r%s, r%s", acc[1], acc[4])
         emit("adc r%s, #0", acc[2])
     emit("stmia r0!, {r%s}", acc[0])
-    print ""
+    print("")
     acc = acc[1:] + acc[:1]
 
     #### now we need to start shifting x and loading from z
@@ -134,7 +134,7 @@ for row in xrange(full_rows):
         emit("adcs r%s, #0", acc[1])
         emit("adc r%s, #0", acc[2])
         emit("stmia r0!, {r%s}", acc[0])
-        print ""
+        print("")
         acc = acc[1:] + acc[:1]
 
     # done shifting x, start shifting y
@@ -153,7 +153,7 @@ for row in xrange(full_rows):
         emit("adcs r%s, #0", acc[1])
         emit("adc r%s, #0", acc[2])
         emit("stmia r0!, {r%s}", acc[0])
-        print ""
+        print("")
         acc = acc[1:] + acc[:1]
 
     # done both shifts, do remaining corner
@@ -164,7 +164,7 @@ for row in xrange(full_rows):
         emit("adcs r%s, r%s", acc[1], acc[4])
         emit("adc r%s, #0", acc[2])
     emit("stmia r0!, {r%s}", acc[0])
-    print ""
+    print("")
     acc = acc[1:] + acc[:1]
     
     emit("umull r%s, r%s, r%s, r%s", acc[3], acc[4], x_regs[2], y_regs[2])
@@ -172,7 +172,7 @@ for row in xrange(full_rows):
     emit("adc r%s, r%s", acc[1], acc[4])
     emit("stmia r0!, {r%s}", acc[0])
     emit("stmia r0!, {r%s}", acc[1])
-    print ""
+    print("")
     
     prev_size = prev_size + 3
     if row < full_rows - 1:
@@ -185,4 +185,4 @@ for row in xrange(full_rows):
         emit("ldmia r1!, {%s}", ",".join(["r%s" % (rx[i]) for i in xrange(3)]))
         emit("ldmia r2!, {%s}", ",".join(["r%s" % (ry[i]) for i in xrange(3)]))
         
-        print ""
+        print("")

@@ -3,7 +3,7 @@
 import sys
 
 if len(sys.argv) < 2:
-    print "Provide the integer size in bytes"
+    print("Provide the integer size in bytes")
     sys.exit(1)
 
 size = int(sys.argv[1])
@@ -23,7 +23,7 @@ def ry(i):
 
 def emit(line, *args):
     s = '"' + line + r' \n\t"'
-    print s % args
+    print(s % args)
 
 #### set up registers
 emit("adiw r30, %s", size - init_size) # move z
@@ -35,7 +35,7 @@ for i in xrange(init_size):
     emit("ld r%s, y+", ry(i))
 
 emit("ldi r25, 0")
-print ""
+print("")
 if init_size == 1:
     emit("mul r2, r12")
     emit("st z+, r0")
@@ -46,7 +46,7 @@ else:
     emit("mul r2, r12")
     emit("st z+, r0")
     emit("mov r22, r1")
-    print ""
+    print("")
     emit("ldi r24, 0")
     emit("mul r2, r13")
     emit("add r22, r0")
@@ -56,7 +56,7 @@ else:
     emit("adc r23, r1")
     emit("adc r24, r25")
     emit("st z+, r22")
-    print ""
+    print("")
 
     #### rest of initial block, with moving accumulator registers
     acc = [23, 24, 22]
@@ -68,7 +68,7 @@ else:
             emit("adc r%s, r1", acc[1])
             emit("adc r%s, r25", acc[2])
         emit("st z+, r%s", acc[0])
-        print ""
+        print("")
         acc = acc[1:] + acc[:1]
     for r in xrange(1, init_size-1):
         emit("ldi r%s, 0", acc[2])
@@ -78,14 +78,14 @@ else:
             emit("adc r%s, r1", acc[1])
             emit("adc r%s, r25", acc[2])
         emit("st z+, r%s", acc[0])
-        print ""
+        print("")
         acc = acc[1:] + acc[:1]
     emit("mul r%s, r%s", rx(init_size-1), ry(init_size-1))
     emit("add r%s, r0", acc[0])
     emit("adc r%s, r1", acc[1])
     emit("st z+, r%s", acc[0])
     emit("st z+, r%s", acc[1])
-print ""
+print("")
 
 #### reset y and z pointers
 emit("sbiw r30, %s", 2 * init_size + 10)
@@ -98,7 +98,7 @@ for i in xrange(10):
 #### load additional x registers
 for i in xrange(init_size, 10):
     emit("ld r%s, x+", rx(i))
-print ""
+print("")
 
 prev_size = init_size
 for row in xrange(full_rows):
@@ -107,7 +107,7 @@ for row in xrange(full_rows):
     emit("mul r2, r12")
     emit("st z+, r0")
     emit("mov r22, r1")
-    print ""
+    print("")
     emit("ldi r24, 0")
     emit("mul r2, r13")
     emit("add r22, r0")
@@ -117,7 +117,7 @@ for row in xrange(full_rows):
     emit("adc r23, r1")
     emit("adc r24, r25")
     emit("st z+, r22")
-    print ""
+    print("")
 
     acc = [23, 24, 22]
     for r in xrange(2, 10):
@@ -128,7 +128,7 @@ for row in xrange(full_rows):
             emit("adc r%s, r1", acc[1])
             emit("adc r%s, r25", acc[2])
         emit("st z+, r%s", acc[0])
-        print ""
+        print("")
         acc = acc[1:] + acc[:1]
 
     #### now we need to start shifting x and loading from z
@@ -147,7 +147,7 @@ for row in xrange(full_rows):
         emit("adc r%s, r25", acc[1])
         emit("adc r%s, r25", acc[2])
         emit("st z+, r%s", acc[0]) # store next byte (z increments)
-        print ""
+        print("")
         acc = acc[1:] + acc[:1]
 
     # done shifting x, start shifting y
@@ -166,7 +166,7 @@ for row in xrange(full_rows):
         emit("adc r%s, r25", acc[1])
         emit("adc r%s, r25", acc[2])
         emit("st z+, r%s", acc[0]) # store next byte (z increments)
-        print ""
+        print("")
         acc = acc[1:] + acc[:1]
 
     # done both shifts, do remaining corner
@@ -178,14 +178,14 @@ for row in xrange(full_rows):
             emit("adc r%s, r1", acc[1])
             emit("adc r%s, r25", acc[2])
         emit("st z+, r%s", acc[0])
-        print ""
+        print("")
         acc = acc[1:] + acc[:1]
     emit("mul r%s, r%s", x_regs[9], y_regs[9])
     emit("add r%s, r0", acc[0])
     emit("adc r%s, r1", acc[1])
     emit("st z+, r%s", acc[0])
     emit("st z+, r%s", acc[1])
-    print ""
+    print("")
     
     prev_size = prev_size + 10
     if row < full_rows - 1:
@@ -198,6 +198,6 @@ for row in xrange(full_rows):
         for i in xrange(10):
             emit("ld r%s, x+", rx(i))
             emit("ld r%s, y+", ry(i))
-        print ""
+        print("")
 
 emit("eor r1, r1")

@@ -43,7 +43,7 @@ class RecordTriggerLength(object):
         trig_length = scope.adc.trig_count
         self.trig_list.append(trig_length)
 
-        print trig_length
+        print(trig_length)
 
     def captureComplete(self, scope, target, project):
         updatedDict = project.addAuxDataConfig(copy.deepcopy(self.attrDictTriggerLength))

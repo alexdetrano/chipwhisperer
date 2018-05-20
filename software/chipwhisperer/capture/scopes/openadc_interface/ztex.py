@@ -102,19 +102,19 @@ class OpenADCInterface_ZTEX(Parameterized, Plugin):
 
         data = bytearray(data)
         if debug:
-            print "RX: ",
+            print("RX: ", end=' ')
             for b in data:
-                print "%02x "%b,
-            print ""
+                print("%02x "%b, end=' ')
+            print("")
         return data
 
     def write(self, data, debug=False):
         data = bytearray(data)
         if debug:
-            print "TX: ",
+            print("TX: ", end=' ')
             for b in data:
-                print "%02x "%b,
-            print ""
+                print("%02x "%b, end=' ')
+            print("")
         # self.interface removed from call for latest API compatibility
         self.dev.write(self.writeEP, data, timeout=500)
 
