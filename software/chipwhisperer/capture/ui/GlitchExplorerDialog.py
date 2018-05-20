@@ -30,8 +30,8 @@ import pickle
 import sys
 from collections import OrderedDict
 from datetime import datetime
-from PySide.QtCore import *
-from PySide.QtGui import *
+from PyQt4.QtCore import *
+from PyQt4.QtGui import *
 from pyqtgraph.parametertree import ParameterTree
 import chipwhisperer.common.utils.qt_tweaks as QtFixes
 from chipwhisperer.common.utils.parameter import Parameterized, Parameter

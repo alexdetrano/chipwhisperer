@@ -26,7 +26,7 @@
 from functools import partial
 import logging
 import numpy as np
-from PySide.QtGui import *
+from PyQt4.QtGui import *
 from chipwhisperer.analyzer.attacks._base import AttackObserver
 from .base import ResultsBase
 from chipwhisperer.common.ui.GraphWidget import GraphWidget

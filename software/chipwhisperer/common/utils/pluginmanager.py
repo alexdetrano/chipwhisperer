@@ -42,8 +42,8 @@ class Plugin(object):
 
 
 try:
-    from PySide.QtCore import *
-    from PySide.QtGui import *
+    from PyQt4.QtCore import *
+    from PyQt4.QtGui import *
 
     class PluginStatusDialog(QTableWidget):
         def __init__(self, parent=None):

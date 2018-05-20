@@ -32,8 +32,8 @@
 
 
 import sys
-from PySide.QtCore import *
-from PySide.QtGui import *
+from PyQt4.QtCore import *
+from PyQt4.QtGui import *
 import os.path
 os.environ["QT_API"] = "pyside"
 import matplotlib

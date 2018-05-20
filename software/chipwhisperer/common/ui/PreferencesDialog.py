@@ -22,7 +22,7 @@
 #    You should have received a copy of the GNU General Public License
 #    along with chipwhisperer.  If not, see <http://www.gnu.org/licenses/>.
 
-from PySide.QtGui import *
+from PyQt4.QtGui import *
 from pyqtgraph.parametertree import ParameterTree
 import chipwhisperer.common.utils.qt_tweaks as QtFixes
 from chipwhisperer.common.utils.parameter import Parameterized

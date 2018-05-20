@@ -25,8 +25,8 @@ import logging
 import os.path
 import shutil
 import glob
-from PySide.QtCore import *
-from PySide.QtGui import *
+from PyQt4.QtCore import *
+from PyQt4.QtGui import *
 import chipwhisperer.common.utils.qt_tweaks as QtFixes
 try:
     from configparser import ConfigParser
