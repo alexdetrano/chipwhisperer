@@ -41,6 +41,7 @@ try:
 except:
     logging.warning("PySide or PyQtGraph not installed, disabling support for pyqtgraph parameters")
 
+from chipwhisperer.common.utils.util import itervalues
 # basestring does not exist in python 3
 if sys.version_info[0] >= 3:
     basestring = str
@@ -271,7 +272,7 @@ class Parameter(object):
             limits = self.opts["limits"]
             if isinstance(limits, dict):
                 try:
-                    return limits.keys()[limits.values().index(value)]
+                    return list(limits.keys())[list(limits.values()).index(value)]
                 except ValueError:
                     ValueError(
                         "Error: Value " + str(value) + " is not valid in Parameter \"" + self.getName() + "\". Options are: " + str(
@@ -337,7 +338,7 @@ class Parameter(object):
 
         elif limits is not None and not self.invalid:
             if (type == "list" and
-                    ((isinstance(limits, dict) and value not in limits.values()) or \
+                    ((isinstance(limits, dict) and value not in list(limits.values())) or \
                              (not isinstance(limits, dict) and value not in limits))
                 ) or \
                     (type == "bool" and value not in [True, False]) or \
@@ -345,7 +346,7 @@ class Parameter(object):
                     (type == "rangegraph" and (value[1] - value[0] != -1) and (
                                     value[0] < limits[0] or value[0] > limits[1] or value[1] < limits[0] or value[1] >
                         limits[1])):
-                if isinstance(limits, dict) and value in limits.keys():
+                if isinstance(limits, dict) and value in list(limits.keys()):
                     value = limits[value]
                 else:
                     #raise ValueError("Value %s out of limits (%s) in parameter \"%s\"" % (str(value), str(limits), self.getName()))
@@ -416,7 +417,7 @@ class Parameter(object):
         else:
             self.invalid = False
             self.sigOptionsChanged.emit(visible=self.isVisible())
-            self.sigLimitsChanged.emit(limits.keys() if isinstance(limits, dict) else limits)
+            self.sigLimitsChanged.emit(list(limits.keys()) if isinstance(limits, dict) else limits)
 
     def readonly(self):
         return self.opts.get('readonly', False)
@@ -512,7 +513,7 @@ class Parameter(object):
         if "default" in self.opts:
             opts["value"] = opts["default"]
         if "limits" in self.opts and isinstance(self.opts["limits"], dict):
-            opts['limits'] = opts['limits'].keys()
+            opts['limits'] = list(opts['limits'].keys())
             opts["value"] = self.getKeyFromValue(opts["default"])
             del opts['values']
         self._PyQtGraphParameter = pyqtgraphParameter.create(**opts)
@@ -537,7 +538,7 @@ class Parameter(object):
 
     def getPath(self):
         """Return the path to the root."""
-        if self in Parameter.registeredParameters.values():
+        if self in list(Parameter.registeredParameters.values()):
             path = []
         elif self.parent is None:
             return None
@@ -550,7 +551,7 @@ class Parameter(object):
     def stealDynamicParameters(self, parent):
         """In list type parameters, append each of the Parameterized objects to the parent argument."""
         if self.opts.get("type", None) == "list" and isinstance(self.opts["values"], dict):
-            for value in self.opts["values"].itervalues():
+            for value in itervalues(self.opts["values"]):
                 if isinstance(value, Parameterized):
                     parent.append(value.getParams())
                     value.getParams().show(self.getValue() == value)
@@ -561,7 +562,7 @@ class Parameter(object):
         In list type parameters, append each of the Parameterized objects to the parent, root or child hierarchy.
         """
         if self.opts.get("type", None) == "list" and isinstance(self.opts["values"], dict):
-            for value in self.opts["values"].itervalues():
+            for value in itervalues(self.opts["values"]):
                 if isinstance(value, Parameterized):
                     mode = self.opts.get("childmode", None)
                     if mode == "parent":
@@ -594,7 +595,7 @@ class Parameter(object):
     def getAllParameters(cls, type=None):
         """Return a list with all parameters with a given type in the hierarchy."""
         ret = []
-        for p in cls.registeredParameters.itervalues():
+        for p in itervalues(cls.registeredParameters):
             parameters = p._getAllParameters(type)
             [ret.append(param) for param in parameters if param not in ret]
         return ret
@@ -640,7 +641,7 @@ class Parameter(object):
     @classmethod
     def saveRegistered(cls, fname, onlyVisibles=False):
         f = open(fname, 'w')
-        for p in cls.registeredParameters.itervalues():
+        for p in itervalues(cls.registeredParameters):
             if 'addLoadSave' in p.opts and p.opts['addLoadSave'] is not False:
                 txt, _ = p.toString(0, onlyVisibles)
                 f.write(txt)
@@ -732,7 +733,7 @@ class Parameter(object):
                 value = child.getOpts()["values"][value]
             except KeyError:
                 raise ValueError("Invalid value '%s' for parameter '%s'.\nValid values: %s" %
-                                 (value, str(parameter), child.getOpts()["values"].keys()))
+                                 (value, str(parameter), list(child.getOpts()["values"].keys())))
         child.setValue(value, echo=echo)
 
 
