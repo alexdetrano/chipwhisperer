@@ -94,8 +94,8 @@ class _QPythonConsoleUI(object):
             parent.setLayout(QtWidgets.QHBoxLayout())
 
         # Monospace font
-        font = QtWidgets.QFont("Courier")
-        font.setStyleHint(QtWidgets.QFont.Monospace)
+        font = QtGui.QFont("Courier")
+        font.setStyleHint(QtGui.QFont.Monospace)
 
         layout = QtWidgets.QVBoxLayout()
         layout.setSpacing(0)
