@@ -41,6 +41,9 @@ try:
 except:
     logging.warning("PySide or PyQtGraph not installed, disabling support for pyqtgraph parameters")
 
+# basestring does not exist in python 3
+if sys.version_info[0] >= 3:
+    basestring = str
 
 class Parameterized(object):
     """
