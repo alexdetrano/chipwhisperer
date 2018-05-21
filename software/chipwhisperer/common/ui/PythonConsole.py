@@ -468,10 +468,10 @@ class QPythonScriptBrowser(QtWidgets.QWidget):
         self.tabChanged(0)
 
         # New style signals causes crashes on at least some platforms, so need to use old style
-        self.file_view_cw.selectionModel().selectionChanged[QItemSelection, QItemSelection].connect(self.selectionChanged)
-        self.file_view_project.selectionModel().selectionChanged[QItemSelection, QItemSelection].connect(self.selectionChanged)
-        self.file_view_all.selectionModel().selectionChanged[QItemSelection, QItemSelection].connect(self.selectionChanged)
-        self.file_view_recent.selectionModel().selectionChanged[QItemSelection, QItemSelection].connect(self.selectionChanged)
+        self.file_view_cw.selectionModel().selectionChanged[QtCore.QItemSelection, QtCore.QItemSelection].connect(self.selectionChanged)
+        self.file_view_project.selectionModel().selectionChanged[QtCore.QItemSelection, QtCore.QItemSelection].connect(self.selectionChanged)
+        self.file_view_all.selectionModel().selectionChanged[QtCore.QItemSelection, QtCore.QItemSelection].connect(self.selectionChanged)
+        self.file_view_recent.selectionModel().selectionChanged[QtCore.QItemSelection, QtCore.QItemSelection].connect(self.selectionChanged)
 
         self.file_view_cw.activated.connect(self.selectionConfirmed)
         self.file_view_all.activated.connect(self.selectionConfirmed)
