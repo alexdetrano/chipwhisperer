@@ -28,6 +28,7 @@ __author__ = "Colin O'Flynn"
 import sys
 import os
 #import pstats, cProfile #For profiling support (not 100% needed)
+from chipwhisperer.common.utils.util import iterkeys
 
 try:
     from configobj import ConfigObj  # import the module
@@ -148,7 +149,7 @@ class TraceContainerConfig(object):
         lst = []
         
         for i in self.attrList:
-            for p in i["values"].iterkeys():
+            for p in iterkeys(i["values"]):
                 try:
                     lst += [{ "name":p, "header":i["values"][p]["headerLabel"], "desc":i["values"][p]["desc"], "order":i["values"][p]["order"] }]
                 except KeyError:
@@ -212,7 +213,7 @@ class TraceContainerConfig(object):
                 logging.debug('Section %s not found' % sn)
                 
             #Check each item
-            for item in ad["values"].iterkeys():
+            for item in iterkeys(ad["values"]):
                 try:
                     self.config[sn][item]
                     
