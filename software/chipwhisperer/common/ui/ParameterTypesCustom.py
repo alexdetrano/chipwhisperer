@@ -66,8 +66,8 @@ def showHelpWindow(curParam):
             wdgt = curParam.widget
         else:
             wdgt = None
-        QtGui.QMessageBox.information(wdgt, 'Help: %s' % nametext, helptext, QtGui.QMessageBox.Cancel,
-                                      QtGui.QMessageBox.Cancel)
+        QtWidgets.QMessageBox.information(wdgt, 'Help: %s' % nametext, helptext, QtWidgets.QMessageBox.Cancel,
+                                      QtWidgets.QMessageBox.Cancel)
 
 
 def drawHelpIcon(curParam, layout=None, removeDefault=True):
@@ -84,15 +84,15 @@ def drawHelpIcon(curParam, layout=None, removeDefault=True):
         numitems = layout.count()
         lastitem = layout.itemAt(numitems - 1)
 
-        if (type(lastitem.widget()) == QtGui.QPushButton) and lastitem.widget().width() == 20:
+        if (type(lastitem.widget()) == QtWidgets.QPushButton) and lastitem.widget().width() == 20:
             lastitem.widget().deleteLater()
 
     # If help option add the button
     if 'help' in curParam.param.opts:
-        buthelp = QtGui.QPushButton()
+        buthelp = QtWidgets.QPushButton()
         buthelp.setFixedWidth(20)
         buthelp.setFixedHeight(20)
-        buthelp.setIcon(standard_icon(QtGui.QStyle.SP_TitleBarContextHelpButton))
+        buthelp.setIcon(standard_icon(QtWidgets.QStyle.SP_TitleBarContextHelpButton))
         buthelp.clicked[bool].connect(lambda ignored: showHelpWindow(curParam))
         layout.addWidget(buthelp)
 
@@ -148,9 +148,9 @@ def __init___fix(self, param, depth):
     #self.defaultBtn.setHidden = ignore_param
     #self.defaultBtn.setEnabled = ignore_param
 
-    self.displayLabel = QtGui.QLabel()
+    self.displayLabel = QtWidgets.QLabel()
 
-    layout = QtGui.QHBoxLayout()
+    layout = QtWidgets.QHBoxLayout()
     layout.setContentsMargins(0, 0, 0, 0)
     layout.setSpacing(2)
     layout.addWidget(w)
@@ -161,7 +161,7 @@ def __init___fix(self, param, depth):
     #No default button
     #layout.addWidget(self.defaultBtn)
 
-    self.layoutWidget = QtGui.QWidget()
+    self.layoutWidget = QtWidgets.QWidget()
     self.layoutWidget.setLayout(layout)
     self.layoutWidget.setMinimumHeight(w.minimumHeight())
 
@@ -190,16 +190,16 @@ def __init___fix2(self, param, depth):
     self.addItem = None
 
     if 'addLoadSave' in param.opts:
-        self.loadBtn = QtGui.QPushButton(QtGui.QIcon(":/images/open.png"),"")
+        self.loadBtn = QtWidgets.QPushButton(QtWidgets.QIcon(":/images/open.png"),"")
         self.loadBtn.setCheckable(False)
         self.loadBtn.setFixedSize(20, 20)
         self.loadBtn.clicked.connect(self.loadBtnClicked)
-        self.saveBtn = QtGui.QPushButton(QtGui.QIcon(":/images/save.png"),"")
+        self.saveBtn = QtWidgets.QPushButton(QtWidgets.QIcon(":/images/save.png"),"")
         self.saveBtn.setCheckable(False)
         self.saveBtn.setFixedSize(20, 20)
         self.saveBtn.clicked.connect(self.saveBtnClicked)
 
-        layout = QtGui.QHBoxLayout()
+        layout = QtWidgets.QHBoxLayout()
         layout.setContentsMargins(0, 0, 0, 0)
         layout.setSpacing(11)
 
@@ -207,7 +207,7 @@ def __init___fix2(self, param, depth):
         layout.addWidget(self.loadBtn)
         layout.addWidget(self.saveBtn)
 
-        self.widget = QtGui.QWidget()
+        self.widget = QtWidgets.QWidget()
         self.widget.setLayout(layout)
 
 GroupParameterItem.__init__ = __init___fix2
@@ -215,7 +215,7 @@ GroupParameterItem.__init__ = __init___fix2
 
 def loadBtnClicked(self):
     fname = QtCore.QSettings().value("Group_"+ self.param.name(), Settings().value("project-home-dir", "/"))
-    fname, _ = QtGui.QFileDialog.getOpenFileName(None, 'Load settings from:', fname, "*.cwset")
+    fname, _ = QtWidgets.QFileDialog.getOpenFileName(None, 'Load settings from:', fname, "*.cwset")
     if fname:
         self.param.opts['addLoadSave'][0](fname)
 
@@ -224,7 +224,7 @@ GroupParameterItem.loadBtnClicked = loadBtnClicked
 
 def saveBtnClicked(self):
     fname = QtCore.QSettings().value("Group_"+ self.param.name(), Settings().value("project-home-dir", "/"))
-    fname, _ = QtGui.QFileDialog.getSaveFileName(None, 'Save settings to:', fname, "*.cwset")
+    fname, _ = QtWidgets.QFileDialog.getSaveFileName(None, 'Save settings to:', fname, "*.cwset")
     if fname:
         QtCore.QSettings().setValue("Group_"+ self.param.name(), fname)
         self.param.opts['addLoadSave'][1](fname)
@@ -288,10 +288,10 @@ class FileParameterItemHelp(WidgetParameterItemHelp):
     def __init__(self, *args, **kwargs):
         super(FileParameterItemHelp, self).__init__(*args, **kwargs)
 
-        fileButton = QtGui.QPushButton()
+        fileButton = QtWidgets.QPushButton()
         fileButton.setFixedWidth(20)
         fileButton.setFixedHeight(20)
-        fileButton.setIcon(self.layoutWidget.style().standardIcon(QtGui.QStyle.SP_FileDialogContentsView))
+        fileButton.setIcon(self.layoutWidget.style().standardIcon(QtWidgets.QStyle.SP_FileDialogContentsView))
         fileButton.clicked[bool].connect(self.openFile)
         self.layoutWidget.layout().addWidget(fileButton)
         fname = QtCore.QSettings().value(self.param.opts["name"])
@@ -299,7 +299,7 @@ class FileParameterItemHelp(WidgetParameterItemHelp):
             self.param.setValue(fname)
 
     def makeWidget(self):
-        w = QtGui.QLineEdit()
+        w = QtWidgets.QLineEdit()
         w.sigChanged = w.editingFinished
         w.value = w.text
         w.setValue = w.setText
@@ -308,10 +308,10 @@ class FileParameterItemHelp(WidgetParameterItemHelp):
 
     def openFile(self):
         if self.param.opts.get("filter", None) == "dir":
-            fname = QtGui.QFileDialog.getExistingDirectory(None, "Open Directory", self.param.value(),
-                                                           QtGui.QFileDialog.ShowDirsOnly)
+            fname = QtWidgets.QFileDialog.getExistingDirectory(None, "Open Directory", self.param.value(),
+                                                           QtWidgets.QFileDialog.ShowDirsOnly)
         else:
-            fname, _ = QtGui.QFileDialog.getOpenFileName(None, 'Get file path', self.param.value(),
+            fname, _ = QtWidgets.QFileDialog.getOpenFileName(None, 'Get file path', self.param.value(),
                                                          self.param.opts.get("filter", "*"))
         if fname:
             self.param.setValue(fname)
@@ -330,7 +330,7 @@ classmapping = {
 }
 
 
-class QWidgetWSignals(QtGui.QWidget):
+class QWidgetWSignals(QtWidgets.QWidget):
     sigValueChanged = QtCore.Signal(object)  # (self)
     sigValueChanging = QtCore.Signal(object, object)  # (self, value)  sent immediately; no delay.
 
@@ -451,14 +451,14 @@ class RangeParameterItem(WidgetParameterItem):
         wlow.sigValueChanged.connect(self.svChangedEmit)
         wlow.sigValueChanging.connect(self.svLowChanging)
 
-        l = QtGui.QHBoxLayout()
+        l = QtWidgets.QHBoxLayout()
         l.setAlignment(QtCore.Qt.AlignLeft)
         l.setContentsMargins(0,0,0,0)
-        l.addWidget(QtGui.QLabel("("))
+        l.addWidget(QtWidgets.QLabel("("))
         l.addWidget(wlow)
-        l.addWidget(QtGui.QLabel(","))
+        l.addWidget(QtWidgets.QLabel(","))
         l.addWidget(whigh)
-        l.addWidget(QtGui.QLabel(")"))
+        l.addWidget(QtWidgets.QLabel(")"))
         l.addStretch()
 
         self.wlow = wlow
@@ -504,20 +504,20 @@ class RangeParameterGraphItem(RangeParameterItem):
 
         l = self.makeLayout()
 
-        graphIcon = QtGui.QIcon()
-        graphIcon.addFile(':/images/wavelimits.png', state=QtGui.QIcon.On)
-        graphIcon.addFile(':/images/wavelimitsoff.png', state=QtGui.QIcon.Off)
+        graphIcon = QtWidgets.QIcon()
+        graphIcon.addFile(':/images/wavelimits.png', state=QtWidgets.QIcon.On)
+        graphIcon.addFile(':/images/wavelimitsoff.png', state=QtWidgets.QIcon.Off)
 
-        self.graphBtn = QtGui.QPushButton()
+        self.graphBtn = QtWidgets.QPushButton()
         self.graphBtn.setToolTip("Allows range selection by draging the interval boundaries on the graph")
         self.graphBtn.setFixedWidth(20)
         self.graphBtn.setFixedHeight(20)
         self.graphBtn.setIcon(graphIcon)
         self.graphBtn.setCheckable(True)
 
-        l.addWidget(QtGui.QLabel("  "))
+        l.addWidget(QtWidgets.QLabel("  "))
         l.addWidget(self.graphBtn)
-        l.addWidget(QtGui.QLabel("  "))
+        l.addWidget(QtWidgets.QLabel("  "))
 
         w = QWidgetWSignals()
         w.setLayout(l)
@@ -607,13 +607,13 @@ class FilelistItem(WidgetParameterItem):
         rnum = self.table.rowCount()
         self.setRows(rnum + 1)
 
-        descitem = QtGui.QTableWidgetItem(desc)
+        descitem = QtWidgets.QTableWidgetItem(desc)
         descitem.setFlags(descitem.flags() & ~QtCore.Qt.ItemIsSelectable)
         if fixedName:
             descitem.setFlags(descitem.flags() & ~QtCore.Qt.ItemIsEditable)
         self.table.setItem(rnum, 0, descitem)
 
-        fnameitem = QtGui.QTableWidgetItem(filename)
+        fnameitem = QtWidgets.QTableWidgetItem(filename)
         fnameitem.setFlags(fnameitem.flags() & ~QtCore.Qt.ItemIsEditable)
         fnameitem.setFlags(fnameitem.flags() & ~QtCore.Qt.ItemIsSelectable)
         self.table.setItem(rnum, 1, fnameitem)
@@ -626,14 +626,14 @@ class FilelistItem(WidgetParameterItem):
 
     def copyFile(self):
         if self.table.currentRow() < 0:
-            QtGui.QMessageBox.warning(None, "Copy Selection", "No item selected")
+            QtWidgets.QMessageBox.warning(None, "Copy Selection", "No item selected")
         else:
             rnum = self.table.currentRow()
             desc = self.table.item(rnum, 0).text() + " Copy"
             oldfname = self.table.item(rnum, 1).text()
 
             # Get new filename
-            fname, _ = QtGui.QFileDialog.getSaveFileName(None, 'Save Copy as', oldfname, '*.py')
+            fname, _ = QtWidgets.QFileDialog.getSaveFileName(None, 'Save Copy as', oldfname, '*.py')
 
             if fname and len(fname) > 0:
 
@@ -653,7 +653,7 @@ class FilelistItem(WidgetParameterItem):
 
     def editFile(self):
         if self.table.currentRow() < 0:
-            QtGui.QMessageBox.warning(None, "Edit Selection", "No item selected")
+            QtWidgets.QMessageBox.warning(None, "Edit Selection", "No item selected")
         else:
             rnum = self.table.currentRow()
             desc = self.table.item(rnum, 0).text()
@@ -664,27 +664,27 @@ class FilelistItem(WidgetParameterItem):
 
     def removeFile(self):
         if self.table.currentRow() < 0:
-            QtGui.QMessageBox.warning(None, "Remove File", "No item selected")
+            QtWidgets.QMessageBox.warning(None, "Remove File", "No item selected")
         else:
             rnum = self.table.currentRow()
             self.table.removeRow(rnum)
 
     def addFile(self):
-        fname, _ = QtGui.QFileDialog.getOpenFileName(None, 'Add File to Project', '.', '*.py')
+        fname, _ = QtWidgets.QFileDialog.getOpenFileName(None, 'Add File to Project', '.', '*.py')
 
         if fname is not None:
             self.addFileToList("Default Name", fname)
 
     def setDefault(self, rnum=None):
         if rnum is None and self.table.currentRow() < 0:
-            QtGui.QMessageBox.warning(None, "Set Default", "No item selected")
+            QtWidgets.QMessageBox.warning(None, "Set Default", "No item selected")
         else:
             if rnum is None:
                 rnum = self.table.currentRow()
             else:
                 self.table.setCurrentCell(rnum, 0)
 
-            highlight = QtGui.QBrush(QtGui.QColor(0, 255, 0))
+            highlight = QtWidgets.QBrush(QtWidgets.QColor(0, 255, 0))
 
             for row in range(0, self.table.rowCount()):
                 for col in range(0, self.table.columnCount()):
@@ -709,21 +709,21 @@ class FilelistItem(WidgetParameterItem):
         else:
             self.editor = None
 
-        self.table = QtGui.QTableWidget()
+        self.table = QtWidgets.QTableWidget()
         self.table.setColumnCount(2)
         self.table.horizontalHeader().hide()
         self.table.verticalHeader().hide()
         self.table.horizontalHeader().setStretchLastSection(True)
-        self.table.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
-        # self.table.horizontalHeader().setSectionResizeMode(QtGui.QHeaderView.Interactive)
+        self.table.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
+        # self.table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Interactive)
 
         self.setRows(0)
 
-        buttonAdd = QtGui.QPushButton('Add')
-        buttonRemove = QtGui.QPushButton('Remove')
-        buttonEdit = QtGui.QPushButton('Edit')
-        buttonCopy = QtGui.QPushButton('Copy')
-        buttonActive = QtGui.QPushButton('Set Active')
+        buttonAdd = QtWidgets.QPushButton('Add')
+        buttonRemove = QtWidgets.QPushButton('Remove')
+        buttonEdit = QtWidgets.QPushButton('Edit')
+        buttonCopy = QtWidgets.QPushButton('Copy')
+        buttonActive = QtWidgets.QPushButton('Set Active')
 
         buttonCopy.clicked.connect(self.copyFile)
         buttonEdit.clicked.connect(self.editFile)
@@ -731,7 +731,7 @@ class FilelistItem(WidgetParameterItem):
         buttonAdd.clicked.connect(self.addFile)
         buttonRemove.clicked.connect(self.removeFile)
 
-        buttonL = QtGui.QGridLayout()
+        buttonL = QtWidgets.QGridLayout()
         buttonL.addWidget(buttonAdd, 0, 0)
         buttonL.addWidget(buttonRemove, 0, 1)
         buttonL.addWidget(buttonEdit, 0, 2)
@@ -739,7 +739,7 @@ class FilelistItem(WidgetParameterItem):
         buttonL.addWidget(buttonActive, 1, 1, 1, 2)
         # buttonL.addStretch()
 
-        l = QtGui.QVBoxLayout()
+        l = QtWidgets.QVBoxLayout()
         l.setContentsMargins(0, 0, 0, 0)
 
         l.addWidget(self.table)
@@ -875,18 +875,18 @@ class LabelParameterItem(WidgetParameterItem):
         if 'tip' in opts:
             w.setToolTip(opts['tip'])
 
-        self.displayLabel = QtGui.QLabel()
+        self.displayLabel = QtWidgets.QLabel()
         self.displayLabel.hide()
 
-        self.defaultBtn = QtGui.QPushButton("")
+        self.defaultBtn = QtWidgets.QPushButton("")
         self.defaultBtn.hide()
 
-        layout = QtGui.QHBoxLayout()
+        layout = QtWidgets.QHBoxLayout()
         layout.setContentsMargins(0, 0, 0, 0)
         layout.addWidget(w)
         layout.addWidget(self.displayLabel)
         layout.addWidget(self.defaultBtn)
-        self.layoutWidget = QtGui.QWidget()
+        self.layoutWidget = QtWidgets.QWidget()
         self.layoutWidget.setLayout(layout)
 
         if w.sigChanged is not None:
@@ -903,8 +903,8 @@ class LabelParameterItem(WidgetParameterItem):
             self.widgetValueChanged()
 
     def makeWidget(self):
-        self.textBox = QtGui.QLabel()
-        self.textBox.setSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.MinimumExpanding)
+        self.textBox = QtWidgets.QLabel()
+        self.textBox.setSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.MinimumExpanding)
         self.textBox.setWordWrap(True)
         self.textBox.setStyleSheet("QLabel { color : gray; }")
         self.textBox.value = lambda: str(self.textBox.text())
