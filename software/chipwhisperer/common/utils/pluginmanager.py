@@ -23,7 +23,6 @@
 #    along with chipwhisperer.  If not, see <http://www.gnu.org/licenses/>.
 
 import importlib
-from Qt.QtWidgets import *
 import inspect
 import logging
 import os.path
@@ -45,6 +44,7 @@ class Plugin(object):
 try:
     from Qt.QtCore import *
     from Qt.QtGui import *
+    from Qt.QtWidgets import *
 
     class PluginStatusDialog(QTableWidget):
         def __init__(self, parent=None):
