@@ -60,6 +60,7 @@ from chipwhisperer.common.ui.TraceManagerDialog import TraceManagerDialog
 from chipwhisperer.common.ui.ProjectTextEditor import ProjectTextEditor
 from chipwhisperer.common.utils import pluginmanager, util
 from chipwhisperer.common.results.base import ResultsBase
+from chipwhisperer.common.utils.util import iteritems
 
 if sys.version_info[0] < 3:
     # qrc_resources was recompiled for qt5 and python3
@@ -438,7 +439,7 @@ class CWMainGUI(QMainWindow):
         self.projectMenu.addAction(self.exampleScriptAct)
         subMenu = QMenu("Submenu", self)
 
-        for name, script in scripts.items():
+        for name, script in iteritems(scripts):
             subMenu.addAction(QAction(name, self, statusTip=script.getDescription(), triggered=util.Command(self.runScript, script)))
 
         self.exampleScriptAct.setMenu(subMenu)
