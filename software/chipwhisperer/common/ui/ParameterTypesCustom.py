@@ -32,6 +32,8 @@
 import os
 from Qt import QtWidgets
 from Qt import QtCore
+from Qt import QtGui
+from Qt.QtWidgets import QApplication as qApp
 
 import pyqtgraph as pg
 #from pyqtgraph.Qt import QtCore, QtWidgets
@@ -78,7 +80,7 @@ def drawHelpIcon(curParam, layout=None, removeDefault=True):
         layout = curParam.layoutWidget.layout()
         standard_icon = curParam.layoutWidget.style().standardIcon
     else:
-        standard_icon = QtGui.qApp.style().standardIcon
+        standard_icon = qApp.style().standardIcon
 
     if removeDefault:
         # Bonus: We don't want the default button so delete it here
