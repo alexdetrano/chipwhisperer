@@ -26,7 +26,10 @@
 #=================================================
 import logging
 import zipfile
-from io import StringIO    # for handling unicode strings
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
 import base64
 from collections import OrderedDict
 import chipwhisperer.capture.scopes.cwhardware.PartialReconfiguration as pr
