@@ -2,7 +2,10 @@
 # Generated on 2017-07-16 14:32:07.063000
 #
 import base64
-from io import StringIO    # for handling unicode strings
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
 
 fwver = [0, 11]
 def getsome(item, filelike=True):

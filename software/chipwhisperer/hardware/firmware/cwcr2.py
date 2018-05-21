@@ -2,7 +2,10 @@
 # Generated on 2016-06-30 11:19:12.607000
 #
 import base64
-from io import StringIO    # for handling unicode strings
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
 
 def getsome(item, filelike=True):
     data = _contents[item]

@@ -19,7 +19,10 @@ from chipwhisperer.common.utils.util import requestConsoleBreak, updateUI
 from os.path import expanduser
 
 # Note: we'd like to use cStringIO (it's faster) but we can't subclass it
-from io import StringIO
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
 
 class MyStringIO(StringIO):
     """Custom StringIO class - prints everything to console"""
@@ -66,9 +69,9 @@ class _QPythonConsoleInterpreter(_InteractiveConsole):
             # Make sure strings don't have null chars before they end by decoding them
             data_sanitized = data.decode('utf-8')
 
-            self.ui.output.moveCursor(QtGui.QTextCursor.End)
+            self.ui.output.moveCursor(QtWidgets.QTextCursor.End)
             self.ui.output.insertPlainText(data_sanitized)
-            self.ui.output.moveCursor(QtGui.QTextCursor.End)
+            self.ui.output.moveCursor(QtWidgets.QTextCursor.End)
 
     def runsource(self,source,filename="<input>",symbol="single"):
         old_stdout = sys.stdout
@@ -91,8 +94,8 @@ class _QPythonConsoleUI(object):
             parent.setLayout(QtGui.QHBoxLayout())
 
         # Monospace font
-        font = QtGui.QFont("Courier")
-        font.setStyleHint(QtGui.QFont.Monospace)
+        font = QtWidgets.QFont("Courier")
+        font.setStyleHint(QtWidgets.QFont.Monospace)
 
         layout = QtGui.QVBoxLayout()
         layout.setSpacing(0)
@@ -765,7 +768,7 @@ class QSplitConsole(QtGui.QSplitter):
         self.script_runner = QPythonScriptRunner(self.console, parent)
         self.addWidget(self.script_runner)
 
-#        self.setLayout(QtGui.QHBoxLayout(self))
+#        self.setLayout(QtWidgets.QHBoxLayout(self))
 
 if __name__ == "__main__":
     import sys
