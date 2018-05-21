@@ -30,10 +30,11 @@
 """
 
 import os
-from Qt.QtWidgets import *
+from Qt import QtWidgets
+from Qt import QtCore
 
 import pyqtgraph as pg
-from pyqtgraph.Qt import QtCore, QtGui
+#from pyqtgraph.Qt import QtCore, QtWidgets
 from pyqtgraph.parametertree.Parameter import registerParameterType
 from pyqtgraph.parametertree.ParameterItem import ParameterItem
 from pyqtgraph.parametertree.parameterTypes import WidgetParameterItem, EventProxy, ListParameterItem, Parameter, ActionParameterItem, TextParameterItem, GroupParameterItem, ListParameter
