@@ -193,11 +193,11 @@ def __init___fix2(self, param, depth):
     self.addItem = None
 
     if 'addLoadSave' in param.opts:
-        self.loadBtn = QtWidgets.QPushButton(QtWidgets.QIcon(":/images/open.png"),"")
+        self.loadBtn = QtWidgets.QPushButton(QtGui.QIcon(":/images/open.png"),"")
         self.loadBtn.setCheckable(False)
         self.loadBtn.setFixedSize(20, 20)
         self.loadBtn.clicked.connect(self.loadBtnClicked)
-        self.saveBtn = QtWidgets.QPushButton(QtWidgets.QIcon(":/images/save.png"),"")
+        self.saveBtn = QtWidgets.QPushButton(QtGui.QIcon(":/images/save.png"),"")
         self.saveBtn.setCheckable(False)
         self.saveBtn.setFixedSize(20, 20)
         self.saveBtn.clicked.connect(self.saveBtnClicked)
@@ -507,9 +507,9 @@ class RangeParameterGraphItem(RangeParameterItem):
 
         l = self.makeLayout()
 
-        graphIcon = QtWidgets.QIcon()
-        graphIcon.addFile(':/images/wavelimits.png', state=QtWidgets.QIcon.On)
-        graphIcon.addFile(':/images/wavelimitsoff.png', state=QtWidgets.QIcon.Off)
+        graphIcon = QtGui.QIcon()
+        graphIcon.addFile(':/images/wavelimits.png', state=QtGui.QIcon.On)
+        graphIcon.addFile(':/images/wavelimitsoff.png', state=QtGui.QIcon.Off)
 
         self.graphBtn = QtWidgets.QPushButton()
         self.graphBtn.setToolTip("Allows range selection by draging the interval boundaries on the graph")
