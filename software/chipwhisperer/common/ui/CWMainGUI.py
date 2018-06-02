@@ -59,7 +59,14 @@ from chipwhisperer.common.ui.TraceManagerDialog import TraceManagerDialog
 from chipwhisperer.common.ui.ProjectTextEditor import ProjectTextEditor
 from chipwhisperer.common.utils import pluginmanager, util
 from chipwhisperer.common.results.base import ResultsBase
-import chipwhisperer.common.ui.qrc_resources
+
+if sys.version_info[0] < 3:
+    # qrc_resources was recompiled for qt5 and python3
+    # basically in python3, we use byte arrays, but in python2, we use strings
+    import chipwhisperer.common.ui.qrc_resources
+else:
+    import chipwhisperer.common.ui.qrc_resources_pysides2_python3
+
 from pyqtgraph.parametertree import ParameterTree
 from chipwhisperer.common.utils.parameter import Parameter
 from chipwhisperer.common.utils import qt_tweaks
