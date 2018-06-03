@@ -437,7 +437,7 @@ class CWMainGUI(QMainWindow):
         self.projectMenu.addAction(self.exampleScriptAct)
         subMenu = QMenu("Submenu", self)
 
-        for name, script in scripts.iteritems():
+        for name, script in scripts.items():
             subMenu.addAction(QAction(name, self, statusTip=script.getDescription(), triggered=util.Command(self.runScript, script)))
 
         self.exampleScriptAct.setMenu(subMenu)

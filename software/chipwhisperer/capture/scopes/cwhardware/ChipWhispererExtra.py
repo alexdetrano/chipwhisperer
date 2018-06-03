@@ -276,7 +276,7 @@ class GPIOSettings(util.DisableNewAttr):
         mode &= ~self.cwe.IOROUTE_GPIO
 
         # Find string
-        for s, bmask in self.TIO_VALID[pinnum].iteritems():
+        for s, bmask in iteritems(self.TIO_VALID[pinnum]):
             if mode == bmask:
                 return s
 
@@ -387,7 +387,7 @@ class GPIOSettings(util.DisableNewAttr):
             Raises: ValueError if new value not listed above
         """
         mode = self.cwe.targetClkOut()
-        for k, v in self.HS2_VALID.iteritems():
+        for k, v in iteritems(self.HS2_VALID):
             if mode == v:
                 if k == 'disabled':
                     return None

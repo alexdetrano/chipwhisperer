@@ -32,6 +32,7 @@ from chipwhisperer.common.results.base import ResultsBase
 from functools import partial
 
 from chipwhisperer.common.utils.tracesource import TraceSource
+from chipwhisperer.common.utils.util import iteritems
 
 
 class AttackScriptGen(Parameterized):
@@ -262,7 +263,7 @@ class AttackScriptGen(Parameterized):
         mse.append("def initReporting(self):", 1)
         mse.append("# Configures the attack observers (usually a set of GUI widgets)")
         if len(ResultsBase.registeredObjects)>0:
-            for k, v in ResultsBase.registeredObjects.iteritems():
+            for k, v in iteritems(ResultsBase.registeredObjects):
                 if hasattr(v,"setTraceSource"):
                     mse.append("self.api.getResults(\"%s\").setTraceSource(self.traces)" % k)
                 if hasattr(v,"setAnalysisSource"):
