@@ -77,9 +77,9 @@ class _QPythonConsoleInterpreter(_InteractiveConsole):
                 # python3 case
                 data_sanitized = data
 
-            self.ui.output.moveCursor(QtWidgets.QTextCursor.End)
+            self.ui.output.moveCursor(QtGui.QTextCursor.End)
             self.ui.output.insertPlainText(data_sanitized)
-            self.ui.output.moveCursor(QtWidgets.QTextCursor.End)
+            self.ui.output.moveCursor(QtGui.QTextCursor.End)
 
     def runsource(self,source,filename="<input>",symbol="single"):
         old_stdout = sys.stdout

@@ -27,6 +27,7 @@
 
 from Qt import QtWidgets
 from Qt import QtCore
+from Qt import QtGui
 
 class QLineEdit(QtWidgets.QLineEdit):
     """Fixes a bug with Mac OS where the Frame would flicker the second time you call show()"""
@@ -42,6 +43,6 @@ class QDialog(QtWidgets.QDialog):
 
 class QTextBrowser(QtWidgets.QTextBrowser):
     def write(self, text):
-        self.moveCursor(QtWidgets.QTextCursor.End)
+        self.moveCursor(QtGui.QTextCursor.End)
         self.insertPlainText(text)
-        self.moveCursor(QtWidgets.QTextCursor.End)
+        self.moveCursor(QtGui.QTextCursor.End)
