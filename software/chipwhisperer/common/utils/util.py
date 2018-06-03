@@ -64,6 +64,8 @@ if PY3:
     viewitems = operator.methodcaller("items")
 
     long = int
+
+    basestring = str
 else:
     def iterkeys(d, **kw):
         return d.iterkeys(**kw)

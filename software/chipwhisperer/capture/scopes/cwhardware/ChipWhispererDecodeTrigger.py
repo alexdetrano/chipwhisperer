@@ -26,6 +26,7 @@
 #=================================================
 
 from chipwhisperer.common.utils.parameter import Parameter, Parameterized, setupSetParam
+from chipwhisperer.common.utils.util import basestring
 import logging
 
 CODE_READ       = 0x80

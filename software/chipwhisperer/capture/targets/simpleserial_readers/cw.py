@@ -26,6 +26,7 @@
 from ._base import SimpleSerialTemplate
 import time
 from chipwhisperer.common.utils.parameter import setupSetParam
+from chipwhisperer.common.utils.util import basestring
 
 
 class SimpleSerial_ChipWhisperer(SimpleSerialTemplate):
