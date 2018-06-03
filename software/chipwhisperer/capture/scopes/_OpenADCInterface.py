@@ -1561,7 +1561,7 @@ class ClockSettings(Parameterized, util.DisableNewAttr):
         freq |= temp[3] << 24
 
         measured = freq * samplefreq
-        return long(measured)
+        return util.long(measured)
 
     def _getAdcFrequency(self):
         """Return the external frequency measured on 'CLOCK' pin. Returned value

@@ -62,6 +62,8 @@ if PY3:
     viewvalues = operator.methodcaller("values")
 
     viewitems = operator.methodcaller("items")
+
+    long = int
 else:
     def iterkeys(d, **kw):
         return d.iterkeys(**kw)
@@ -78,6 +80,8 @@ else:
     viewkeys = operator.methodcaller("viewkeys")
 
     viewvalues = operator.methodcaller("viewvalues")
+
+    long = long
 
 viewitems = operator.methodcaller("viewitems")
 
