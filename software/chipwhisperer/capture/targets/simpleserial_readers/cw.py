@@ -190,7 +190,16 @@ class SimpleSerial_ChipWhisperer(SimpleSerialTemplate):
         #TODO: fix removing garbage at front
         # result = data[1:(len(data)+1)]
         result = data
-        result = result.decode('latin-1')
+        #
+        #
+        # python3 strings are already decoded
+        # see https://stackoverflow.com/questions/28583565/str-object-has-no-attribute-decode-python-3-error
+        try:
+            # python2
+            result = result.decode('latin-1')
+        except AttributeError:
+            # python3
+            pass
         self.debugInfo(lastRx=result)
         return result
 
