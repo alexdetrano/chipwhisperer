@@ -625,7 +625,10 @@ class QPythonScriptRunner(QtWidgets.QWidget):
                 QtWidgets.QMessageBox.NoButton
             )
         else:
-            self.console.runLine("execfile('%s')" % path)
+            # execfile does not work in python3
+            # see https://stackoverflow.com/questions/6357361/alternative-to-execfile-in-python-3
+            cmd = 'exec(compile(open("{f}", "rb").read(), "{f}", "exec"))'.format(f=path)
+            self.console.runLine(cmd)
             self.browser.addRecentFile(path)
 
     def editCopyScript(self):
